@@ -1,57 +1,7 @@
 {
-  "categories": [
-    {
-      "id": "pantalonetas",
-      "name": "Pantalonetas"
-    },
-    {
-      "id": "camisetas",
-      "name": "Camisetas"
-    },
-    {
-      "id": "accesorios",
-      "name": "Accesorios"
-    }
-  ],
+  "categories": [],
   "products": [],
   "pageContent": {
-    "hero.eyebrow": "Colección de la calle",
-    "hero.title.line1": "Atréveter a marcar",
-    "hero.title.line2": "la diferencia,",
-    "hero.title.line3": "viste tu estilo,",
-    "hero.title.accent": "viste NJ23",
-    "hero.description": "Pantalonetas y ropa urbana con actitud: siluetas anchas, telas resistentes y detalles que no pasan desapercibidos en NJ23.",
-    "hero.cta.primary": "Ver catálogo →",
-    "hero.cta.secondary": "Cómo comprar",
-    "catalog.title": "El catálogo",
-    "catalog.description": "Piezas resistentes, pensadas para el asfalto, no para la vitrina.",
-    "band.eyebrow": "Hecho para durar en la calle",
-    "band.title": "Costuras reforzadas, cero excusas",
-    "band.description": "Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.",
-    "band.stat1.value": "12",
-    "band.stat1.label": "Talleres locales",
-    "band.stat2.value": "48H",
-    "band.stat2.label": "Envío promedio",
-    "band.stat3.value": "4.8",
-    "band.stat3.label": "Calificación",
-    "process.title": "Cómo comprar",
-    "process.description": "Tres pasos, sin vueltas.",
-    "process.step1.num": "01",
-    "process.step1.title": "Elige tu talla",
-    "process.step1.text": "Cada producto trae una guía de tallas basada en medidas reales, no de maniquí.",
-    "process.step2.num": "02",
-    "process.step2.title": "Escríbenos por WhatsApp",
-    "process.step2.text": "Confirmamos disponibilidad y coordinamos el pago en minutos.",
-    "process.step3.num": "03",
-    "process.step3.title": "Recíbelo en casa",
-    "process.step3.text": "Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.",
-    "cta.title": "Tu próxima pieza favorita está en la calle",
-    "cta.button": "Ver todo el catálogo →",
-    "footer.tagline": "Ropa urbana hecha en la costa, para la calle.",
-    "footer.copyright": "© 2026 NJ23. Barranquilla, Colombia.",
-    "footer.slogan": "Atrévete a marcar la diferencia, viste tu estilo, viste NJ23.",
-    "footer.contact.whatsapp": "WhatsApp",
-    "footer.contact.instagram": "Instagram",
-    "footer.contact.email": "hola@nj23.co"
+    "hero.title.line1": "Atrévete a marcar"
   }
 }
