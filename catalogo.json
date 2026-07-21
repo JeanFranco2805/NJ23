@@ -15,6 +15,16 @@
       "name": "Camiseta Nike",
       "cat": "camisetas",
       "price": 89000,
+      "sizes": [
+        {
+          "size": "M",
+          "stock": 1
+        },
+        {
+          "size": "L",
+          "stock": 1
+        }
+      ],
       "colors": [
         "#FFD400"
       ],
