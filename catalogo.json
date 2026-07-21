@@ -3,6 +3,10 @@
     {
       "id": "camisetas",
       "name": "Camisetas"
+    },
+    {
+      "id": "pantalonetas",
+      "name": "Pantalonetas"
     }
   ],
   "products": [],
