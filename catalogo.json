@@ -15,6 +15,20 @@
   ],
   "products": [
     {
+      "id": "p1",
+      "name": "Pantaloneta Asfalto",
+      "cat": "pantalonetas",
+      "price": 89900,
+      "colors": [
+        "#FFD400",
+        "#FF2E7E",
+        "#0F0F11"
+      ],
+      "tag": "new",
+      "bg": "#2A2A2E",
+      "svg": "shorts"
+    },
+    {
       "id": "p2",
       "name": "Camiseta Bloque",
       "cat": "camisetas",
