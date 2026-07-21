@@ -44,7 +44,7 @@
     },
     {
       "id": "p3",
-      "name": "Pantaloneta NJ23",
+      "name": "Pantaloneta",
       "cat": "pantalonetas",
       "price": 79900,
       "colors": [
@@ -52,7 +52,7 @@
         "#0F0F11"
       ],
       "tag": "best seller",
-      "bg": "#2E2A24",
+      "bg": "#2e2a24",
       "svg": "shorts"
     },
     {
