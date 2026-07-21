@@ -26,12 +26,11 @@
       ],
       "tag": "new",
       "bg": "#2a2a2e",
-      "svg": "shorts",
-      "image": "assets/productos/1784654970957-pantaloneta-color-negro.jpg"
+      "svg": "shorts"
     },
     {
       "id": "p2",
-      "name": "Camiseta",
+      "name": "Camiseta Bloque",
       "cat": "camisetas",
       "price": 64900,
       "colors": [
@@ -39,12 +38,12 @@
         "#F1EFE6"
       ],
       "tag": "",
-      "bg": "#26262a",
+      "bg": "#26262A",
       "svg": "shirt"
     },
     {
       "id": "p3",
-      "name": "Pantaloneta",
+      "name": "Pantaloneta NJ23",
       "cat": "pantalonetas",
       "price": 79900,
       "colors": [
@@ -52,7 +51,7 @@
         "#0F0F11"
       ],
       "tag": "best seller",
-      "bg": "#2e2a24",
+      "bg": "#2E2A24",
       "svg": "shorts"
     },
     {
