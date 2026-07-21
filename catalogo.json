@@ -31,7 +31,7 @@
     },
     {
       "id": "p2",
-      "name": "Camiseta Bloque",
+      "name": "Camiseta",
       "cat": "camisetas",
       "price": 64900,
       "colors": [
@@ -39,7 +39,7 @@
         "#F1EFE6"
       ],
       "tag": "",
-      "bg": "#26262A",
+      "bg": "#26262a",
       "svg": "shirt"
     },
     {
