@@ -13,32 +13,5 @@
       "name": "Accesorios"
     }
   ],
-  "products": [
-    {
-      "id": "p5",
-      "name": "Gorra Barricada",
-      "cat": "accesorios",
-      "price": 44900,
-      "colors": [
-        "#0F0F11",
-        "#FFD400"
-      ],
-      "tag": "",
-      "bg": "#28282C",
-      "svg": "cap"
-    },
-    {
-      "id": "p6",
-      "name": "Pantaloneta Concreto",
-      "cat": "pantalonetas",
-      "price": 84900,
-      "colors": [
-        "#F1EFE6",
-        "#0F0F11"
-      ],
-      "tag": "",
-      "bg": "#2A2626",
-      "svg": "shorts"
-    }
-  ]
+  "products": []
 }
