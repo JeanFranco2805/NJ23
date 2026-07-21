@@ -1,0 +1,98 @@
+{
+  "categories": [
+    {
+      "id": "pantalonetas",
+      "name": "Pantalonetas"
+    },
+    {
+      "id": "camisetas",
+      "name": "Camisetas"
+    },
+    {
+      "id": "accesorios",
+      "name": "Accesorios"
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "Pantaloneta Asfalto",
+      "cat": "pantalonetas",
+      "price": 89900,
+      "colors": [
+        "#FFD400",
+        "#FF2E7E",
+        "#0F0F11"
+      ],
+      "tag": "new",
+      "bg": "#2A2A2E",
+      "svg": "shorts"
+    },
+    {
+      "id": "p2",
+      "name": "Camiseta Bloque",
+      "cat": "camisetas",
+      "price": 64900,
+      "colors": [
+        "#0F0F11",
+        "#F1EFE6"
+      ],
+      "tag": "",
+      "bg": "#26262A",
+      "svg": "shirt"
+    },
+    {
+      "id": "p3",
+      "name": "Pantaloneta NJ23",
+      "cat": "pantalonetas",
+      "price": 79900,
+      "colors": [
+        "#FF2E7E",
+        "#0F0F11"
+      ],
+      "tag": "best seller",
+      "bg": "#2E2A24",
+      "svg": "shorts"
+    },
+    {
+      "id": "p4",
+      "name": "Camiseta Muro",
+      "cat": "camisetas",
+      "price": 59900,
+      "colors": [
+        "#FFD400",
+        "#0F0F11",
+        "#F1EFE6"
+      ],
+      "tag": "",
+      "bg": "#242428",
+      "svg": "shirt"
+    },
+    {
+      "id": "p5",
+      "name": "Gorra Barricada",
+      "cat": "accesorios",
+      "price": 44900,
+      "colors": [
+        "#0F0F11",
+        "#FFD400"
+      ],
+      "tag": "",
+      "bg": "#28282C",
+      "svg": "cap"
+    },
+    {
+      "id": "p6",
+      "name": "Pantaloneta Concreto",
+      "cat": "pantalonetas",
+      "price": 84900,
+      "colors": [
+        "#F1EFE6",
+        "#0F0F11"
+      ],
+      "tag": "",
+      "bg": "#2A2626",
+      "svg": "shorts"
+    }
+  ]
+}
