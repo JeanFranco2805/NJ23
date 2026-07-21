@@ -15,63 +15,6 @@
   ],
   "products": [
     {
-      "id": "p1",
-      "name": "Pantaloneta Color Negro",
-      "cat": "pantalonetas",
-      "price": 89900,
-      "colors": [
-        "#FFD400",
-        "#FF2E7E",
-        "#0F0F11"
-      ],
-      "tag": "new",
-      "bg": "#2a2a2e",
-      "svg": "shorts",
-      "image": "assets/productos/1784655625304-pantaloneta-color-negro.jpg"
-    },
-    {
-      "id": "p2",
-      "name": "Camiseta Bloque",
-      "cat": "camisetas",
-      "price": 64900,
-      "colors": [
-        "#0F0F11",
-        "#F1EFE6"
-      ],
-      "tag": "",
-      "bg": "#26262a",
-      "svg": "shirt",
-      "image": "assets/productos/1784656514344-camiseta-bloque.jpg"
-    },
-    {
-      "id": "p3",
-      "name": "Pantaloneta NJ23",
-      "cat": "pantalonetas",
-      "price": 79900,
-      "colors": [
-        "#FF2E7E",
-        "#0F0F11"
-      ],
-      "tag": "best seller",
-      "bg": "#2e2a24",
-      "svg": "shorts",
-      "image": "assets/productos/1784655652616-pantaloneta-nj23.jpg"
-    },
-    {
-      "id": "p4",
-      "name": "Camiseta Muro",
-      "cat": "camisetas",
-      "price": 59900,
-      "colors": [
-        "#FFD400",
-        "#0F0F11",
-        "#F1EFE6"
-      ],
-      "tag": "",
-      "bg": "#242428",
-      "svg": "shirt"
-    },
-    {
       "id": "p5",
       "name": "Gorra Barricada",
       "cat": "accesorios",
