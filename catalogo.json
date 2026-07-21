@@ -16,7 +16,7 @@
   "products": [
     {
       "id": "p1",
-      "name": "Pantaloneta Asfalto",
+      "name": "Pantaloneta Color Negro",
       "cat": "pantalonetas",
       "price": 89900,
       "colors": [
@@ -25,7 +25,7 @@
         "#0F0F11"
       ],
       "tag": "new",
-      "bg": "#2A2A2E",
+      "bg": "#2a2a2e",
       "svg": "shorts"
     },
     {
