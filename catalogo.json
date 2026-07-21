@@ -1,5 +1,10 @@
 {
-  "categories": [],
+  "categories": [
+    {
+      "id": "camisetas",
+      "name": "Camisetas"
+    }
+  ],
   "products": [],
   "pageContent": {
     "hero.title.line1": "Atrévete a marcar",
