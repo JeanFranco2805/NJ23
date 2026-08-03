@@ -724,8 +724,11 @@
 
     <div class="admin-section" id="tab-github">
       <div class="admin-note" id="githubNote">
-        Configura la conexión para publicar los cambios en la web automáticamente.
-        <strong>La clave de acceso no se guarda en el código fuente</strong>, solo en este navegador.
+        <strong>Para que los cambios persistan</strong> debes crear un token en GitHub.<br>
+        1. Ve a GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens.<br>
+        2. Crea un token con permiso <strong>Contents: Read and write</strong> para el repositorio <strong>JeanFranco2805/NJ23</strong>.<br>
+        3. Pégalo aquí y presiona <strong>Probar conexión</strong>.<br>
+        <strong>El token se guarda solo en este navegador</strong>, no en el código fuente.
       </div>
 
       <div class="github-status" id="githubStatus">
@@ -862,7 +865,6 @@
   const STORAGE_SESSION = 'nj23_admin_session';
   const STORAGE_GH = 'nj23_github_config';
   const STORAGE_BACKUP = 'nj23_local_backup';
-  const DEFAULT_GH_TOKEN = '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';
   const ASSETS_PATH = 'assets/productos/';
 
   const SVG_SHORTS = `<svg viewBox="0 0 100 100" fill="none" stroke="#F1EFE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18 L80 18 L83 46 L62 46 L60 84 L50 84 L48 52 L52 52 L50 84 L38 84 L36 46 L17 46 Z"/><path d="M20 18 L17 46"/><path d="M80 18 L83 46"/></svg>`;
@@ -1020,11 +1022,7 @@
   /* ===================== GITHUB CONFIG ===================== */
   function getGithubConfig(){
     const raw = localStorage.getItem(STORAGE_GH);
-    if(raw){
-      const cfg = JSON.parse(raw);
-      return { token: cfg.token || DEFAULT_GH_TOKEN, owner: cfg.owner || 'JeanFranco2805', repo: cfg.repo || 'NJ23', path: cfg.path || 'catalogo.json', branch: cfg.branch || 'main' };
-    }
-    return { token: DEFAULT_GH_TOKEN, owner:'JeanFranco2805', repo:'NJ23', path:'catalogo.json', branch:'main' };
+    return raw ? JSON.parse(raw) : { token:'', owner:'JeanFranco2805', repo:'NJ23', path:'catalogo.json', branch:'main' };
   }
   function saveGithubConfig(cfg){ localStorage.setItem(STORAGE_GH, JSON.stringify(cfg)); }
 
@@ -1835,16 +1833,17 @@
 
   /* ---------- github config ---------- */
   function loadGithubForm(){
-    const cfg = getGithubConfig();
-    document.getElementById('ghToken').value = cfg.token || DEFAULT_GH_TOKEN;
-    document.getElementById('ghOwner').value = cfg.owner || 'JeanFranco2805';
-    document.getElementById('ghRepo').value = cfg.repo || 'NJ23';
-    document.getElementById('ghPath').value = cfg.path || 'catalogo.json';
-    document.getElementById('ghBranch').value = cfg.branch || 'main';
-    if(!cfg.token){
+    const raw = localStorage.getItem(STORAGE_GH);
+    if(!raw){
       updateGithubStatus(false, 'Falta token');
       return;
     }
+    const cfg = JSON.parse(raw);
+    if(cfg.token) document.getElementById('ghToken').value = cfg.token;
+    if(cfg.owner) document.getElementById('ghOwner').value = cfg.owner;
+    if(cfg.repo) document.getElementById('ghRepo').value = cfg.repo;
+    if(cfg.path) document.getElementById('ghPath').value = cfg.path;
+    if(cfg.branch) document.getElementById('ghBranch').value = cfg.branch;
     updateGithubStatus(false, 'Falta probar conexión');
   }
 
