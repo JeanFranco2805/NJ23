@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>NJ23 — Catálogo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -996,14 +999,7 @@
       { id: 'camisetas', name: 'Camisetas' },
       { id: 'accesorios', name: 'Accesorios' }
     ],
-    products: [
-      { id: 'p1', name: 'Pantaloneta Asfalto', cat: 'pantalonetas', price: 89900, sizes: [{size:'S',stock:5},{size:'M',stock:8},{size:'L',stock:4},{size:'XL',stock:2}], colors: ['#FFD400','#FF2E7E','#0F0F11'], tag: 'new', bg: '#2A2A2E', svg: 'shorts' },
-      { id: 'p2', name: 'Camiseta Bloque', cat: 'camisetas', price: 64900, sizes: [{size:'S',stock:3},{size:'M',stock:6},{size:'L',stock:5},{size:'XL',stock:1}], colors: ['#0F0F11','#F1EFE6'], tag: '', bg: '#26262A', svg: 'shirt' },
-      { id: 'p3', name: 'Pantaloneta NJ23', cat: 'pantalonetas', price: 79900, sizes: [{size:'S',stock:2},{size:'M',stock:7},{size:'L',stock:6},{size:'XL',stock:3}], colors: ['#FF2E7E','#0F0F11'], tag: 'best seller', bg: '#2E2A24', svg: 'shorts' },
-      { id: 'p4', name: 'Camiseta Muro', cat: 'camisetas', price: 59900, sizes: [{size:'S',stock:4},{size:'M',stock:9},{size:'L',stock:3},{size:'XL',stock:2}], colors: ['#FFD400','#0F0F11','#F1EFE6'], tag: '', bg: '#242428', svg: 'shirt' },
-      { id: 'p5', name: 'Gorra Barricada', cat: 'accesorios', price: 44900, sizes: [{size:'Única',stock:10}], colors: ['#0F0F11','#FFD400'], tag: '', bg: '#28282C', svg: 'cap' },
-      { id: 'p6', name: 'Pantaloneta Concreto', cat: 'pantalonetas', price: 84900, sizes: [{size:'S',stock:6},{size:'M',stock:4},{size:'L',stock:5},{size:'XL',stock:2}], colors: ['#F1EFE6','#0F0F11'], tag: '', bg: '#2A2626', svg: 'shorts' }
-    ],
+    products: [],
     pageContent: defaultPageContent
   };
 
@@ -1145,15 +1141,30 @@
     return true;
   }
 
+  async function getCurrentSha(cfg){
+    try{
+      const url = githubApiUrl(cfg, cfg.path) + '&_=' + Date.now();
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${cfg.token}`,
+          'Accept': 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2022-11-28',
+          'Cache-Control': 'no-cache'
+        }
+      });
+      if(!res.ok) throw new Error('Error ' + res.status);
+      const data = await res.json();
+      return data.sha;
+    }catch(e){
+      console.warn('No se pudo obtener SHA actual:', e);
+      return null;
+    }
+  }
+
   async function saveCatalogToGithub(cfg){
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(appData, null, 2))));
-    let currentSha = null;
-    try{
-      const existing = await fetchFromGithub(cfg);
-      currentSha = existing.sha;
-    }catch(e){
-      console.warn('No se pudo obtener SHA actual, intentando como archivo nuevo:', e);
-    }
+    const currentSha = await getCurrentSha(cfg);
     const data = await uploadToGithub(cfg, cfg.path, content, 'Actualización de catálogo NJ23', currentSha);
     githubSha = data.content.sha;
     return data;
@@ -1170,6 +1181,8 @@
     return path;
   }
 
+  let saveInProgress = false;
+
   async function doSaveToGithub(silent=false, attempt=1){
     const cfg = getGithubConfig();
     if(!cfg.token || !cfg.owner || !cfg.repo){
@@ -1177,6 +1190,12 @@
       updatePublishStatus();
       return false;
     }
+    if(saveInProgress){
+      console.log('Guardado ya en progreso, esperando...');
+      await new Promise(r => setTimeout(r, 1500));
+      return doSaveToGithub(silent, attempt);
+    }
+    saveInProgress = true;
     try{
       await saveCatalogToGithub(cfg);
       clearLocalBackup();
@@ -1185,15 +1204,17 @@
       return true;
     }catch(err){
       console.warn('Auto-save falló:', err);
-      if(attempt < 3 && err.message && err.message.includes('does not match')){
-        console.warn('SHA desactualizado, reintentando...');
+      if(attempt < 5 && err.message && err.message.includes('does not match')){
+        console.warn('SHA desactualizado, reintentando (intento ' + attempt + ')...');
         githubSha = null;
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 1000 * attempt));
         return doSaveToGithub(silent, attempt + 1);
       }
       if(!silent) showToast('No se pudieron publicar los cambios: ' + err.message, 'error', 8000);
       updatePublishStatus();
       return false;
+    }finally{
+      saveInProgress = false;
     }
   }
 
