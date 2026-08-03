@@ -1,33 +1,2098 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NJ23 — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#17171A;
+    --asphalt-2:#1F1F23;
+    --paper:#F1EFE6;
+    --paper-70:rgba(241,239,230,0.68);
+    --paper-45:rgba(241,239,230,0.42);
+    --ink:#0F0F11;
+    --yellow:#FFD400;
+    --magenta:#FF2E7E;
+    --line:rgba(241,239,230,0.14);
+    --panel:#1D1D21;
+    --green:#25D366;
+    --red:#FF4444;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--asphalt); color:var(--paper); font-family:'Work Sans',sans-serif; overflow-x:hidden;}
+  h1,h2,h3,.display{font-family:'Anton',sans-serif; text-transform:uppercase; letter-spacing:0.01em; line-height:0.92; font-weight:400;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--yellow); color:var(--ink);}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
 
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta property="og:image:alt" content="">
+  .hazard{
+    height:10px; width:100%;
+    background:repeating-linear-gradient(-45deg, var(--yellow) 0 16px, var(--ink) 16px 32px);
+  }
 
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--paper-70); display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:9px; height:9px; background:var(--magenta); display:inline-block;}
 
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
+  /* ---------- nav ---------- */
+  nav{position:sticky; top:0; z-index:50; background:rgba(23,23,26,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:76px;}
+  .logo{font-family:'Anton',sans-serif; font-size:24px; letter-spacing:0.02em; display:flex; align-items:center;}
+  .logo span{color:var(--yellow);}
+  .logo img{height:48px; width:auto; display:block;}
+  footer .logo img{height:64px;}
+  nav ul{list-style:none; display:flex; gap:34px;}
+  nav a{text-decoration:none; font-size:14px; font-weight:600; position:relative;}
+  nav a::after{content:''; position:absolute; left:0; bottom:-4px; width:0; height:3px; background:var(--magenta); transition:width .25s ease;}
+  nav a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--yellow); color:var(--ink); padding:11px 22px;
+    font-size:13px; font-weight:700; text-decoration:none;
+    clip-path:polygon(6% 0,100% 0,94% 100%,0% 100%);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .nav-cta:hover{background:var(--magenta); color:var(--paper); transform:translateY(-2px);}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .btn-login{
+    background:transparent; color:var(--paper); border:2px solid var(--line);
+    padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;
+    font-family:'Work Sans',sans-serif;
+    transition:all .2s ease;
+  }
+  .btn-login:hover{border-color:var(--yellow); color:var(--yellow);}
+  .btn-admin{
+    background:var(--magenta); color:var(--paper); border:none;
+    padding:10px 18px; font-size:13px; font-weight:700; cursor:pointer;
+    font-family:'Work Sans',sans-serif;
+    clip-path:polygon(6% 0,100% 0,94% 100%,0% 100%);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn-admin:hover{background:var(--yellow); color:var(--ink); transform:translateY(-2px);}
+  .admin-bar{
+    background:var(--magenta); color:var(--paper); font-size:12px; font-weight:700;
+    text-align:center; padding:6px 0; display:none;
+  }
+  .admin-bar.show{display:block;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; padding:110px 0 90px; overflow:hidden; border-bottom:1px solid var(--line);}
+  .hero::before{
+    content:''; position:absolute; inset:0; opacity:0.05; pointer-events:none;
+    background-image:radial-gradient(rgba(241,239,230,0.6) 1px, transparent 1px);
+    background-size:5px 5px;
+  }
+  .hero-inner{position:relative; z-index:1; display:grid; grid-template-columns:1.25fr 1fr; gap:48px; align-items:end;}
+  .hero h1{font-size:clamp(40px,6.2vw,92px); color:var(--paper);}
+  .hero h1 .line{display:block; opacity:0; transform:translateX(-40px) skewX(-6deg); animation:slideIn .7s cubic-bezier(.16,1,.3,1) forwards;}
+  .hero h1 .line:nth-child(2){animation-delay:.12s;}
+  .hero h1 .line:nth-child(3){animation-delay:.24s;}
+  .hero h1 .accent{color:var(--yellow); position:relative;}
+  @keyframes slideIn{to{opacity:1; transform:translateX(0) skewX(0);}}
+  .underline-svg{width:220px; height:20px; display:block; margin-top:6px;}
+  .underline-svg path{
+    stroke:var(--magenta); stroke-width:6; fill:none; stroke-linecap:round;
+    stroke-dasharray:340; stroke-dashoffset:340;
+    animation:draw 1s cubic-bezier(.16,1,.3,1) forwards;
+    animation-delay:.7s;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .hero .eyebrow{margin-bottom:20px; opacity:0; animation:fadeUp .6s ease forwards; animation-delay:.1s;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+  .hero-copy{display:flex; flex-direction:column; gap:24px; opacity:0; animation:fadeUp .7s ease forwards; animation-delay:.5s;}
+  .hero-copy p{font-size:16px; line-height:1.65; color:var(--paper-70); max-width:36ch;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-primary,.btn-ghost{
+    padding:16px 30px; font-size:14px; font-weight:700; text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    clip-path:polygon(4% 0,100% 0,96% 100%,0% 100%);
+    transition:transform .25s ease, background .25s ease;
+  }
+  .btn-primary{background:var(--magenta); color:var(--paper);}
+  .btn-primary:hover{background:var(--yellow); color:var(--ink); transform:translate(2px,-2px);}
+  .btn-ghost{border:2px solid var(--paper); background:transparent;}
+  .btn-ghost:hover{border-color:var(--yellow); color:var(--yellow); transform:translate(2px,-2px);}
+
+  /* ---------- ticker ---------- */
+  .ticker{background:var(--yellow); color:var(--ink); padding:13px 0; overflow:hidden; white-space:nowrap;}
+  .ticker-track{display:inline-flex; animation:scrollLeft 20s linear infinite;}
+  .ticker-track span{
+    font-family:'JetBrains Mono',monospace; font-weight:600; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:0 26px; display:inline-flex; align-items:center; gap:26px;
+  }
+  .ticker-track span::after{content:'//'; opacity:0.5;}
+  @keyframes scrollLeft{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  /* ---------- sections ---------- */
+  .section{padding:100px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; gap:24px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(34px,4.2vw,54px); color:var(--paper);}
+  .section-head p{max-width:36ch; color:var(--paper-70); font-size:15px; line-height:1.6;}
+
+  .reveal{opacity:0; transform:translateY(34px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .filters{display:flex; gap:10px; margin-bottom:44px; flex-wrap:wrap;}
+  .filter-btn{
+    font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.05em;
+    padding:10px 18px; border:2px solid var(--line); background:transparent; color:var(--paper); cursor:pointer;
+    transition:all .2s ease;
+  }
+  .filter-btn:hover{border-color:var(--paper);}
+  .filter-btn.active{background:var(--yellow); color:var(--ink); border-color:var(--yellow);}
+
+  /* ---------- product grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .card{
+    background:var(--panel); border:1px solid var(--line); overflow:hidden; position:relative;
+    transition:transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease;
+    cursor:pointer;
+  }
+  .card:hover{transform:translateY(-6px); border-color:var(--yellow);}
+  .card-media{height:280px; position:relative; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--line); overflow:hidden;}
+  .card-media-inner{width:100%; height:100%; display:flex; align-items:center; justify-content:center;}
+  .card-media-inner img{width:100%; height:100%; object-fit:contain;}
+  .card-media-inner svg{width:54%; height:54%; transition:transform .5s cubic-bezier(.16,1,.3,1);}
+  .card:hover .card-media-inner svg{transform:scale(1.08) rotate(-3deg);}
+  .card-tag{
+    position:absolute; top:14px; left:14px; z-index:2;
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase;
+    background:var(--ink); color:var(--paper); padding:5px 11px;
+  }
+  .card-tag.new{background:var(--magenta);}
+  .card-body{padding:20px 20px 22px;}
+  .card-body .cat{font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--paper-45); margin-bottom:8px; display:block;}
+  .card-body h3{font-family:'Work Sans',sans-serif; text-transform:none; font-size:18px; font-weight:700; margin-bottom:10px; color:var(--paper);}
+  .card-foot{display:flex; align-items:center; justify-content:space-between; margin-top:12px;}
+  .swatches{display:flex; gap:6px;}
+  .swatch{width:15px; height:15px; border:1px solid rgba(241,239,230,0.25);}
+  .price{font-family:'JetBrains Mono',monospace; font-weight:600; font-size:16px; color:var(--yellow);}
+  .card-wa{
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%; margin-top:14px;
+    padding:11px 0; border:2px solid var(--paper); background:transparent;
+    font-family:'Work Sans',sans-serif; font-size:13px; font-weight:700; cursor:pointer;
+    text-decoration:none; color:var(--paper); transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .card-wa svg{width:16px; height:16px; fill:currentColor;}
+  .card-wa:hover{background:var(--green); border-color:var(--green); color:#fff;}
+  .sizes-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;}
+  .size-btn{
+    min-width:34px; height:34px; border:1px solid var(--line); background:var(--asphalt); color:var(--paper);
+    font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 10px;
+  }
+  .size-btn:hover{border-color:var(--paper);}
+  .size-btn.active{background:var(--yellow); color:var(--ink); border-color:var(--yellow);}
+  .size-btn.out-of-stock{opacity:0.35; cursor:not-allowed; text-decoration:line-through;}
+  .stock-info{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-45); margin-top:6px;}
+
+  /* ---------- band ---------- */
+  .band{background:var(--ink); padding:100px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .band-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .band h2{font-size:clamp(32px,4.2vw,50px); color:var(--paper);}
+  .band p{color:var(--paper-70); font-size:16px; line-height:1.7; margin:20px 0 28px; max-width:42ch;}
+  .stat-row{display:flex; gap:38px; margin-top:32px;}
+  .stat b{font-family:'Anton',sans-serif; font-size:34px; display:block; color:var(--magenta);}
+  .stat span{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--paper-45);}
+  .band-visual{
+    aspect-ratio:1/1; background:var(--asphalt-2); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .band-visual svg{width:56%; height:56%;}
+  .band-visual::after{
+    content:'AUTÉNTICO'; position:absolute; bottom:18px; right:18px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; color:var(--yellow); opacity:0.7;
+  }
+
+  /* ---------- steps ---------- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .step{border-top:3px solid var(--yellow); padding-top:22px;}
+  .step .num{font-family:'JetBrains Mono',monospace; color:var(--magenta); font-size:14px; margin-bottom:14px; display:block;}
+  .step h3{font-family:'Work Sans',sans-serif; text-transform:none; font-size:19px; font-weight:700; margin-bottom:10px; color:var(--paper);}
+  .step p{color:var(--paper-70); font-size:14.5px; line-height:1.6;}
+
+  /* ---------- cta ---------- */
+  .cta{text-align:center; padding:120px 0;}
+  .cta h2{font-size:clamp(38px,6.2vw,76px); max-width:17ch; margin:0 auto 30px; color:var(--paper);}
+  .cta .btn-primary{padding:18px 40px; font-size:15px; display:inline-flex; margin:0 auto;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink); color:var(--paper); padding:60px 0 30px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid var(--line);}
+  .foot-grid h4{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--paper-45); margin-bottom:16px;}
+  .foot-grid ul{list-style:none;}
+  .foot-grid li{margin-bottom:12px;}
+  .foot-grid a{text-decoration:none; font-size:14px; color:var(--paper-70); transition:color .2s ease;}
+  .foot-grid a:hover{color:var(--yellow);}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:26px; flex-wrap:wrap; gap:12px;}
+  .foot-bottom p{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--paper-45);}
+
+  /* ---------- whatsapp float ---------- */
+  .wa-float{
+    position:fixed; right:26px; bottom:26px; z-index:60; width:60px; height:60px;
+    background:var(--green); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 28px rgba(0,0,0,0.4); text-decoration:none;
+    clip-path:polygon(15% 0,100% 0,85% 100%,0 100%);
+    animation:waPulse 2.4s ease-in-out infinite;
+  }
+  .wa-float svg{width:28px; height:28px; fill:#fff;}
+  .wa-float:hover{animation:none; transform:scale(1.06);}
+  @keyframes waPulse{
+    0%,100%{box-shadow:0 12px 28px rgba(0,0,0,0.4), 0 0 0 0 rgba(37,211,102,0.45);}
+    50%{box-shadow:0 12px 28px rgba(0,0,0,0.4), 0 0 0 10px rgba(37,211,102,0);}
+  }
+  .wa-tooltip{
+    position:absolute; right:76px; top:50%; transform:translateY(-50%);
+    background:var(--paper); color:var(--ink); font-size:13px; font-weight:700;
+    padding:8px 14px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .wa-float:hover .wa-tooltip{opacity:1;}
+
+  /* ---------- modal & admin ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(15,15,17,0.85); backdrop-filter:blur(4px);
+    z-index:200; display:none; align-items:flex-start; justify-content:center; padding:24px;
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{
+    background:var(--panel); border:1px solid var(--line); width:100%; max-width:420px;
+    padding:32px; position:relative;
+    clip-path:polygon(3% 0,100% 0,97% 100%,0% 100%);
+  }
+  .modal h2{font-size:28px; margin-bottom:8px;}
+  .modal p{color:var(--paper-70); font-size:14px; margin-bottom:22px;}
+  .modal-close{
+    position:absolute; top:14px; right:18px; background:none; border:none; color:var(--paper);
+    font-size:26px; cursor:pointer; line-height:1;
+  }
+  .modal-close:hover{color:var(--magenta);}
+  .form-group{margin-bottom:18px;}
+  .form-group label{display:block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px; color:var(--paper-70);}
+  .form-group input, .form-group select{
+    width:100%; background:var(--asphalt); border:1px solid var(--line); color:var(--paper);
+    padding:12px 14px; font-size:14px; font-family:'Work Sans',sans-serif;
+  }
+  .form-group input:focus, .form-group select:focus{outline:none; border-color:var(--yellow);}
+  .modal .btn-primary{border:none; width:100%; justify-content:center; cursor:pointer;}
+  .modal-error{color:var(--magenta); font-size:13px; margin-top:10px; display:none;}
+
+  .admin-modal{max-width:900px; max-height:92vh; overflow-y:auto;}
+  .admin-modal, .product-modal{overflow-y:auto; -webkit-overflow-scrolling:touch;}
+
+  /* inline editing */
+  body.editing [data-edit-key]{position:relative; cursor:text; outline:2px dashed rgba(255,212,0,0.4); outline-offset:4px; transition:outline .2s ease;}
+  body.editing [data-edit-key]:hover{outline-color:var(--yellow); background:rgba(255,212,0,0.08);}
+  body.editing [data-edit-key]:focus{outline:2px solid var(--magenta); background:rgba(255,46,126,0.08);}
+  .edit-hint{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:70; background:var(--yellow); color:var(--ink); padding:10px 20px; font-size:13px; font-weight:700; border-radius:4px; box-shadow:0 8px 24px rgba(0,0,0,0.4); display:none;}
+  body.editing .edit-hint{display:block;}
+  .admin-header{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:12px;}
+  .admin-header h2{margin:0;}
+  .file-warning{background:#b00020; color:#fff; text-align:center; padding:12px; font-family:'Work Sans',sans-serif; font-size:14px; font-weight:700;}
+  .file-warning a{color:#ffeb3b; text-decoration:underline;}
+  .publish-status{display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--paper-70);}
+  .publish-status .status-dot{width:10px; height:10px; border-radius:50%; background:var(--green);}
+  .publish-status.pending .status-dot{background:var(--yellow); animation:pulse 1.2s infinite;}
+  .publish-status.error .status-dot{background:var(--red);}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+  .admin-tabs{display:flex; gap:8px; margin-bottom:22px; border-bottom:1px solid var(--line); padding-bottom:12px;}
+  .admin-tab{
+    background:transparent; border:none; color:var(--paper-70); font-size:13px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.05em; padding:8px 14px; cursor:pointer;
+    border-bottom:3px solid transparent; margin-bottom:-13px;
+  }
+  .admin-tab.active{color:var(--yellow); border-bottom-color:var(--yellow);}
+  .admin-section{display:none;}
+  .admin-section.active{display:block;}
+
+  /* admin table */
+  .admin-toolbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;}
+  .admin-table{width:100%; border-collapse:collapse; font-size:14px;}
+  .admin-table th, .admin-table td{padding:12px; text-align:left; border-bottom:1px solid var(--line); vertical-align:middle;}
+  .admin-table th{font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--paper-70); background:var(--asphalt);}
+  .admin-table td{color:var(--paper);}
+  .admin-table tr:hover td{background:rgba(255,255,255,0.03);}
+  .admin-table .thumb{width:56px; height:56px; object-fit:cover; border:1px solid var(--line); background:var(--asphalt); vertical-align:middle;}
+  .admin-table .actions{white-space:nowrap;}
+  .admin-table .actions .btn-small{display:inline-block; vertical-align:middle;}
+  .btn-small{
+    padding:6px 12px; font-size:12px; font-weight:700; border:none; cursor:pointer; font-family:'Work Sans',sans-serif;
+  }
+  .btn-small.edit{background:var(--yellow); color:var(--ink);}
+  .btn-small.delete{background:var(--red); color:#fff;}
+  .btn-small:hover{opacity:0.85;}
+  .pagination{display:flex; align-items:center; justify-content:space-between; margin-top:18px; flex-wrap:wrap; gap:10px;}
+  .pagination .pages{display:flex; gap:6px;}
+  .page-btn{
+    min-width:34px; height:34px; border:1px solid var(--line); background:transparent; color:var(--paper);
+    cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12px;
+  }
+  .page-btn.active{background:var(--yellow); color:var(--ink); border-color:var(--yellow);}
+  .page-btn:hover:not(.active){border-color:var(--paper);}
+  .page-btn:disabled{opacity:0.4; cursor:not-allowed;}
+  .per-page{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--paper-70);}
+  .per-page select{background:var(--asphalt); border:1px solid var(--line); color:var(--paper); padding:6px 10px;}
+
+  /* admin categories */
+  .admin-list{display:flex; flex-direction:column; gap:12px;}
+  .admin-item{
+    background:var(--asphalt); border:1px solid var(--line); padding:14px;
+    display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center;
+  }
+  .admin-item input{
+    background:var(--panel); border:1px solid var(--line); color:var(--paper); padding:10px 12px; font-size:14px;
+  }
+  .btn-icon{
+    background:transparent; border:1px solid var(--line); color:var(--paper); width:36px; height:36px;
+    display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px;
+  }
+  .btn-icon:hover{border-color:var(--magenta); color:var(--magenta);}
+  .btn-icon.save:hover{border-color:var(--green); color:var(--green);}
+  .btn-add{
+    background:var(--yellow); color:var(--ink); border:none; padding:12px 18px; font-size:13px;
+    font-weight:700; cursor:pointer; font-family:'Work Sans',sans-serif;
+  }
+  .btn-add:hover{background:var(--paper);}
+  .admin-note{
+    background:rgba(255,212,0,0.08); border-left:3px solid var(--yellow); padding:12px 14px;
+    font-size:13px; color:var(--paper-70); margin-bottom:18px;
+  }
+  .admin-note code{background:var(--asphalt); padding:2px 6px; color:var(--yellow); font-family:'JetBrains Mono',monospace;}
+  .admin-note.error{background:rgba(255,68,68,0.08); border-left-color:var(--red);}
+  .admin-note.success{background:rgba(37,211,102,0.08); border-left-color:var(--green);}
+
+  /* product form modal */
+  .product-modal{max-width:520px; max-height:88vh; padding:22px; clip-path:none; display:flex; flex-direction:column;}
+  .product-modal h2{font-size:22px; margin-bottom:16px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .form-row .form-group{margin-bottom:12px;}
+  .form-group{margin-bottom:12px;}
+  .form-group label{font-size:11px; margin-bottom:4px;}
+  .form-group input, .form-group select{padding:9px 11px; font-size:13px;}
+  .product-modal .form-group input[type="color"]{padding:0; height:34px; border:none;}
+
+  .color-chips{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:6px;}
+  .color-chip{
+    display:flex; align-items:center; gap:6px; background:var(--asphalt); border:1px solid var(--line);
+    padding:4px 6px; border-radius:4px;
+  }
+  .color-chip input[type="color"]{width:28px; height:28px; border:none; padding:0; background:none; cursor:pointer;}
+  .color-chip input[type="text"]{width:76px; background:transparent; border:none; padding:2px; font-size:12px; color:var(--paper); font-family:'JetBrains Mono',monospace;}
+  .color-chip input[type="text"]:focus{outline:none;}
+  .btn-remove-color{
+    background:transparent; border:none; color:var(--paper-45); width:22px; height:22px;
+    display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px;
+  }
+  .btn-remove-color:hover{color:var(--red);}
+  .size-form-row{display:flex; align-items:center; gap:8px; margin-bottom:8px;}
+  .size-form-row input[type="text"]{width:70px;}
+  .size-form-row input[type="number"]{width:80px;}
+  .btn-add-color{
+    background:transparent; border:2px dashed var(--line); color:var(--paper-70); padding:6px 12px;
+    font-size:12px; font-weight:700; cursor:pointer; border-radius:4px;
+  }
+  .btn-add-color:hover{border-color:var(--yellow); color:var(--yellow);}
+  .image-preview{width:100%; max-height:160px; object-fit:contain; border:1px solid var(--line); margin-top:8px; background:var(--asphalt); display:none; border-radius:4px;}
+  .image-preview.show{display:block;}
+  .image-or{display:block; text-align:center; color:var(--paper-45); font-size:11px; margin:6px 0;}
+  .file-input-wrapper{position:relative; overflow:hidden; display:inline-block; width:100%;}
+  .file-input-wrapper input[type=file]{position:absolute; left:0; top:0; opacity:0; width:100%; height:100%; cursor:pointer;}
+  .file-input-label{
+    display:block; width:100%; padding:10px; border:2px dashed var(--line); color:var(--paper-70);
+    text-align:center; font-size:12px; font-weight:700; cursor:pointer; border-radius:4px;
+  }
+  .file-input-label:hover{border-color:var(--yellow); color:var(--yellow);}
+  .github-status{display:flex; align-items:center; gap:10px; margin-bottom:16px; font-size:13px;}
+  .status-dot{width:10px; height:10px; border-radius:50%; background:var(--paper-45);}
+  .status-dot.ok{background:var(--green);}
+  .status-dot.bad{background:var(--red);}
+  .btn-github{
+    background:var(--green); color:var(--ink); border:none; padding:14px 20px; font-size:14px;
+    font-weight:700; cursor:pointer; font-family:'Work Sans',sans-serif; width:100%; margin-top:10px;
+  }
+  .btn-github:hover{background:var(--paper);}
+  .btn-github:disabled{opacity:0.5; cursor:not-allowed;}
+  .save-bottom{
+    padding-top:14px; border-top:1px solid var(--line); margin-top:16px;
+    display:flex; gap:10px;
+  }
+  .save-bottom .btn-primary{flex:1; padding:12px 20px;}
+  .save-bottom .btn-ghost{padding:12px 20px; color:var(--paper);}
+
+  /* custom alert/confirm modal */
+  .custom-modal{max-width:420px; text-align:center;}
+  .custom-modal .modal-icon{font-size:42px; margin-bottom:10px;}
+  .custom-modal h3{font-size:22px; margin-bottom:10px;}
+  .custom-modal p{color:var(--paper-70); font-size:14px; line-height:1.5; margin-bottom:22px;}
+  .custom-modal .modal-buttons{display:flex; gap:10px;}
+  .custom-modal .modal-buttons button{flex:1; padding:12px; font-size:13px; font-weight:700; border:none; cursor:pointer; font-family:'Work Sans',sans-serif;}
+  .custom-modal .btn-confirm{background:var(--magenta); color:var(--paper);}
+  .custom-modal .btn-confirm:hover{background:var(--yellow); color:var(--ink);}
+  .custom-modal .btn-cancel{background:var(--asphalt); color:var(--paper); border:1px solid var(--line);}
+  .custom-modal .btn-cancel:hover{border-color:var(--paper);}
+
+  /* toast notifications */
+  .toast-container{
+    position:fixed; top:20px; right:20px; z-index:300;
+    display:flex; flex-direction:column; gap:10px; pointer-events:none;
+  }
+  .toast{
+    background:var(--panel); border-left:4px solid var(--yellow); color:var(--paper);
+    padding:14px 18px; min-width:260px; max-width:340px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    font-size:13px; font-weight:600;
+    transform:translateX(120%); opacity:0;
+    animation:toastIn .3s ease forwards;
+    pointer-events:auto;
+  }
+  .toast.error{border-left-color:var(--red);}
+  .toast.success{border-left-color:var(--green);}
+  .toast.out{animation:toastOut .3s ease forwards;}
+  @keyframes toastIn{to{transform:translateX(0); opacity:1;}}
+  @keyframes toastOut{to{transform:translateX(120%); opacity:0;}}
+
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .band-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    nav ul{display:none;}
+    .admin-table .thumb{width:44px; height:44px;}
+    .form-row{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .product-modal{max-width:100%; max-height:95vh; padding:16px;}
+    .product-modal h2{font-size:20px;}
+    .color-chip input[type="text"]{width:60px;}
+  }
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .nav-actions{gap:8px;}
+    .btn-login, .btn-admin{padding:8px 12px; font-size:12px;}
+    .admin-table{font-size:12px;}
+    .admin-table th, .admin-table td{padding:8px;}
+    .admin-table .actions{flex-direction:column; gap:4px;}
+    .btn-small{width:100%;}
+  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}}
+</style>
 </head>
-
 <body>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/app.js"></script>
+<div class="hazard"></div>
+<div class="file-warning" id="fileWarning" style="display:none;">
+  Estás abriendo la página desde el archivo local. Los cambios no se sincronizarán bien.
+  <strong>Usa la web: https://jeanfranco2805.github.io/NJ23/via40-landing.html</strong>
+</div>
+<div class="admin-bar" id="adminBar">Modo administrador activo</div>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><img src="img/img.png" alt="NJ23"></div>
+    <ul>
+      <li><a href="#coleccion">Colección</a></li>
+      <li><a href="#proceso">Cómo funciona</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-admin" id="adminBtn" style="display:none;">Administrar</button>
+      <button class="btn-login" id="loginBtn">Iniciar sesión</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow" data-edit-key="hero.eyebrow">Colección de la calle</div>
+      <h1>
+        <span class="line" data-edit-key="hero.title.line1">Atrévete a marcar</span>
+        <span class="line" data-edit-key="hero.title.line2">la diferencia,</span>
+        <span class="line" data-edit-key="hero.title.line3">viste tu estilo, <span class="accent" data-edit-key="hero.title.accent">viste NJ23</span></span>
+      </h1>
+      <svg class="underline-svg" viewBox="0 0 220 20"><path d="M4 14 C 60 4, 140 20, 216 8"/></svg>
+    </div>
+    <div class="hero-copy">
+      <p data-edit-key="hero.description">Pantalonetas y ropa urbana con actitud: siluetas anchas, telas resistentes y detalles que no pasan desapercibidos en NJ23.</p>
+      <div class="hero-actions">
+        <a href="#coleccion" class="btn-primary" data-edit-key="hero.cta.primary">Ver catálogo →</a>
+        <a href="#proceso" class="btn-ghost" data-edit-key="hero.cta.secondary">Cómo comprar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Pantalonetas</span><span>Camisetas</span><span>Envíos a toda Colombia</span><span>Cortes anchos</span><span>Nueva colección</span>
+    <span>Pantalonetas</span><span>Camisetas</span><span>Envíos a toda Colombia</span><span>Cortes anchos</span><span>Nueva colección</span>
+  </div>
+</div>
+
+<section class="section" id="coleccion">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 data-edit-key="catalog.title">El catálogo</h2>
+      <p data-edit-key="catalog.description">Piezas resistentes, pensadas para el asfalto, no para la vitrina.</p>
+    </div>
+
+    <div class="filters reveal" id="filters">
+      <button class="filter-btn active" data-filter="all">Todo</button>
+    </div>
+
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="band-grid">
+      <div class="reveal">
+        <div class="eyebrow" data-edit-key="band.eyebrow">Hecho para durar en la calle</div>
+        <h2 data-edit-key="band.title">Costuras reforzadas, cero excusas</h2>
+        <p data-edit-key="band.description">Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.</p>
+        <div class="stat-row">
+          <div class="stat"><b data-edit-key="band.stat1.value">12</b><span data-edit-key="band.stat1.label">Talleres locales</span></div>
+          <div class="stat"><b data-edit-key="band.stat2.value">48H</b><span data-edit-key="band.stat2.label">Envío promedio</span></div>
+          <div class="stat"><b data-edit-key="band.stat3.value">4.8</b><span data-edit-key="band.stat3.label">Calificación</span></div>
+        </div>
+      </div>
+      <div class="band-visual reveal">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#F1EFE6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 16 L80 16 L83 44 L62 44 L60 86 L50 86 L48 50 L52 50 L50 86 L38 86 L36 44 L17 44 Z"/>
+          <path d="M20 16 L17 44" stroke-dasharray="3 4"/>
+          <path d="M80 16 L83 44" stroke-dasharray="3 4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="proceso">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 data-edit-key="process.title">Cómo comprar</h2>
+      <p data-edit-key="process.description">Tres pasos, sin vueltas.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num" data-edit-key="process.step1.num">01</span>
+        <h3 data-edit-key="process.step1.title">Elige tu talla</h3>
+        <p data-edit-key="process.step1.text">Cada producto trae una guía de tallas basada en medidas reales, no de maniquí.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num" data-edit-key="process.step2.num">02</span>
+        <h3 data-edit-key="process.step2.title">Escríbenos por WhatsApp</h3>
+        <p data-edit-key="process.step2.text">Confirmamos disponibilidad y coordinamos el pago en minutos.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num" data-edit-key="process.step3.num">03</span>
+        <h3 data-edit-key="process.step3.title">Recíbelo en casa</h3>
+        <p data-edit-key="process.step3.text">Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta reveal">
+  <div class="wrap">
+    <h2 data-edit-key="cta.title">Tu próxima pieza favorita está en la calle</h2>
+    <a href="#coleccion" class="btn-primary" data-edit-key="cta.button">Ver todo el catálogo →</a>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;"><img src="img/img.png" alt="NJ23"></div>
+        <p style="color:var(--paper-70); font-size:14px; max-width:32ch; line-height:1.6;" data-edit-key="footer.tagline">Ropa urbana hecha en la costa, para la calle.</p>
+      </div>
+      <div>
+        <h4>Catálogo</h4>
+        <ul id="footerCatalog">
+          <li><a href="#coleccion">Pantalonetas</a></li>
+          <li><a href="#coleccion">Camisetas</a></li>
+          <li><a href="#coleccion">Accesorios</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#proceso">Guía de tallas</a></li>
+          <li><a href="#proceso">Envíos</a></li>
+          <li><a href="#contacto">Cambios</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="#" data-edit-key="footer.contact.whatsapp">WhatsApp</a></li>
+          <li><a href="#" data-edit-key="footer.contact.instagram">Instagram</a></li>
+          <li><a href="#" data-edit-key="footer.contact.email">hola@nj23.co</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p data-edit-key="footer.copyright">© 2026 NJ23. Barranquilla, Colombia.</p>
+      <p data-edit-key="footer.slogan">Atrévete a marcar la diferencia, viste tu estilo, viste NJ23.</p>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" id="waFloat" href="https://wa.me/573239120468?text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20cat%C3%A1logo%20de%20NJ23." target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
+  <span class="wa-tooltip">Escríbenos por WhatsApp</span>
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2zm5.8 14.14c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.93-4.36-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.15.3-.29.46-.14.16-.3.36-.43.48-.14.13-.29.28-.13.55.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.29 2.32 1.44.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.43.19.5.3.06.11.06.63-.18 1.31z"/></svg>
+</a>
+
+<!-- Login modal -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" data-close="loginModal">&times;</button>
+    <h2>Acceso administrador</h2>
+    <p>Ingresa la clave para gestionar productos y catálogos.</p>
+    <div class="form-group">
+      <label for="loginPass">Contraseña</label>
+      <input type="password" id="loginPass" placeholder="••••••••">
+    </div>
+    <button class="btn-primary" id="doLogin">Entrar</button>
+    <p class="modal-error" id="loginError">Contraseña incorrecta.</p>
+  </div>
+</div>
+
+<!-- Admin modal -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal admin-modal">
+    <button class="modal-close" data-close="adminModal">&times;</button>
+    <div class="admin-header">
+      <h2>Panel de administración</h2>
+      <div class="publish-status" id="publishStatus" title="Estado de sincronización">
+        <span class="status-dot" id="adminStatusDot"></span>
+        <span id="adminStatusText">Sincronizado</span>
+      </div>
+    </div>
+    <div class="admin-note" style="margin-bottom:14px;">Versión del panel: <strong id="adminVersion">v2.1</strong>. Si ves errores, recarga con <strong>Ctrl+F5</strong>.</div>
+    <button class="btn-github" id="publishNowTop" style="margin-bottom:14px; width:100%;">💾 Publicar cambios ahora</button>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="products">Productos</button>
+      <button class="admin-tab" data-tab="categories">Catálogos</button>
+      <button class="admin-tab" data-tab="github">Configuración</button>
+    </div>
+
+    <div class="admin-section active" id="tab-products">
+      <div class="admin-toolbar">
+        <button class="btn-add" id="addProduct">+ Nuevo producto</button>
+        <div class="per-page">
+          <span>Mostrar</span>
+          <select id="itemsPerPage">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+          </select>
+          <span>por página</span>
+        </div>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Etiqueta</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="adminProductTableBody"></tbody>
+      </table>
+      <div class="pagination" id="productPagination"></div>
+    </div>
+
+    <div class="admin-section" id="tab-categories">
+      <div class="admin-list" id="adminCategoryList"></div>
+      <button class="btn-add" id="addCategory">+ Crear catálogo</button>
+    </div>
+
+    <div class="admin-section" id="tab-github">
+      <div class="admin-note" id="githubNote">
+        Configura la conexión para publicar los cambios en la web automáticamente.
+        <strong>La clave de acceso no se guarda en el código fuente</strong>, solo en este navegador.
+      </div>
+
+      <div class="github-status" id="githubStatus">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">No configurado</span>
+      </div>
+
+      <div class="form-group">
+        <label for="ghToken">Clave de acceso (token)</label>
+        <input type="password" id="ghToken" placeholder="github_pat_...">
+      </div>
+      <div class="form-group">
+        <label for="ghOwner">Usuario</label>
+        <input type="text" id="ghOwner" value="JeanFranco2805" placeholder="tu-usuario">
+      </div>
+      <div class="form-group">
+        <label for="ghRepo">Repositorio</label>
+        <input type="text" id="ghRepo" value="NJ23" placeholder="NJ23">
+      </div>
+      <div class="form-group">
+        <label for="ghPath">Archivo del catálogo</label>
+        <input type="text" id="ghPath" value="catalogo.json" placeholder="catalogo.json">
+      </div>
+      <div class="form-group">
+        <label for="ghBranch">Rama</label>
+        <input type="text" id="ghBranch" value="main" placeholder="main">
+      </div>
+
+      <button class="btn-primary" id="testGithub" style="width:100%; justify-content:center; margin-bottom:10px;">Probar conexión</button>
+      <button class="btn-github" id="saveGithub" style="margin-bottom:10px;">💾 Publicar cambios ahora</button>
+      <button class="btn-ghost" id="discardLocal" style="width:100%; border-color:var(--red); color:var(--red);">🗑️ Descartar cambios y volver a cargar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product edit modal -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal product-modal">
+    <button class="modal-close" data-close="productModal">&times;</button>
+    <h2 id="productModalTitle">Nuevo producto</h2>
+
+    <div class="form-group">
+      <label for="pName">Nombre del producto</label>
+      <input type="text" id="pName" placeholder="Ej: Pantaloneta">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pCat">Categoría</label>
+        <select id="pCat"></select>
+      </div>
+      <div class="form-group">
+        <label for="pPrice">Precio</label>
+        <input type="number" id="pPrice" placeholder="89900">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pTag">Etiqueta</label>
+        <select id="pTag">
+          <option value="">Ninguna</option>
+          <option value="new">Nuevo</option>
+          <option value="best seller">Best seller</option>
+          <option value="oferta">Oferta</option>
+        </select>
+        <input type="text" id="pTagCustom" placeholder="Personalizada (opcional)" style="margin-top:6px;">
+      </div>
+      <div class="form-group">
+        <label for="pSvg">Ícono</label>
+        <select id="pSvg">
+          <option value="shorts">Pantaloneta</option>
+          <option value="shirt">Camiseta</option>
+          <option value="cap">Gorra</option>
+        </select>
+        <label for="pBg" style="margin-top:6px;">Fondo tarjeta</label>
+        <input type="color" id="pBg" value="#2A2A2E">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Colores</label>
+      <div class="color-chips" id="pColors"></div>
+      <button type="button" class="btn-add-color" id="addColor">+ Agregar color</button>
+    </div>
+
+    <div class="form-group">
+      <label>Tallas y stock</label>
+      <div id="pSizes"></div>
+      <button type="button" class="btn-add-color" id="addSize">+ Agregar talla</button>
+    </div>
+
+    <div class="form-group">
+      <label>Imagen del producto</label>
+      <div class="file-input-wrapper">
+        <input type="file" id="pImageFile" accept="image/*">
+        <span class="file-input-label">📁 Arrastra o haz click para subir imagen</span>
+      </div>
+      <span class="image-or">— o —</span>
+      <input type="text" id="pImageUrl" placeholder="Pega aquí una URL de imagen">
+      <img id="pImagePreview" class="image-preview" alt="Vista previa">
+    </div>
+
+    <div class="save-bottom">
+      <button class="btn-primary" id="saveProduct">Guardar producto</button>
+      <button class="btn-ghost" id="cancelProduct" type="button">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Custom alert/confirm modal -->
+<div class="modal-overlay" id="customModal">
+  <div class="modal custom-modal">
+    <div class="modal-icon" id="customModalIcon">⚠️</div>
+    <h3 id="customModalTitle">Atención</h3>
+    <p id="customModalText">Mensaje</p>
+    <div class="modal-buttons" id="customModalButtons">
+      <button class="btn-confirm" id="customModalOk">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+<div class="edit-hint">Modo edición: doble clic en cualquier texto resaltado para modificarlo</div>
+
+<script>
+  /* ===================== CONFIGURACIÓN ===================== */
+  const ADMIN_PASSWORD = 'nj23admin';
+  const WA_NUMBER = '573239120468';
+  const CATALOG_URL = location.protocol === 'file:'
+    ? 'https://raw.githubusercontent.com/JeanFranco2805/NJ23/main/catalogo.json'
+    : 'catalogo.json';
+  const STORAGE_SESSION = 'nj23_admin_session';
+  const STORAGE_GH = 'nj23_github_config';
+  const STORAGE_BACKUP = 'nj23_local_backup';
+  const DEFAULT_GH_TOKEN = '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';
+  const ASSETS_PATH = 'assets/productos/';
+
+  const SVG_SHORTS = `<svg viewBox="0 0 100 100" fill="none" stroke="#F1EFE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18 L80 18 L83 46 L62 46 L60 84 L50 84 L48 52 L52 52 L50 84 L38 84 L36 46 L17 46 Z"/><path d="M20 18 L17 46"/><path d="M80 18 L83 46"/></svg>`;
+  const SVG_SHIRT = `<svg viewBox="0 0 100 100" fill="none" stroke="#F1EFE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 20 L16 30 L25 45 L32 39 L32 84 L68 84 L68 39 L75 45 L84 30 L68 20 L60 27 L40 27 Z"/></svg>`;
+  const SVG_CAP = `<svg viewBox="0 0 100 100" fill="none" stroke="#F1EFE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 55 Q50 22 84 55 L84 63 Q50 38 16 63 Z"/><path d="M44 28 Q50 19 56 28"/></svg>`;
+
+  function waLink(message){ return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`; }
+
+  /* ===================== MODALES CUSTOM ===================== */
+  function showAlert(message, title='Atención', icon='⚠️'){
+    return new Promise(resolve=>{
+      const modal = document.getElementById('customModal');
+      document.getElementById('customModalIcon').textContent = icon;
+      document.getElementById('customModalTitle').textContent = title;
+      document.getElementById('customModalText').textContent = message;
+      document.getElementById('customModalButtons').innerHTML = `<button class="btn-confirm" id="customModalOk">Aceptar</button>`;
+      modal.classList.add('show');
+      document.getElementById('customModalOk').addEventListener('click', ()=>{
+        modal.classList.remove('show');
+        resolve();
+      }, { once:true });
+    });
+  }
+
+  function showConfirm(message, title='Confirmar', icon='❓'){
+    return new Promise(resolve=>{
+      const modal = document.getElementById('customModal');
+      document.getElementById('customModalIcon').textContent = icon;
+      document.getElementById('customModalTitle').textContent = title;
+      document.getElementById('customModalText').textContent = message;
+      document.getElementById('customModalButtons').innerHTML = `
+        <button class="btn-cancel" id="customModalCancel">Cancelar</button>
+        <button class="btn-confirm" id="customModalOk">Aceptar</button>
+      `;
+      modal.classList.add('show');
+      const close = (result)=>{
+        modal.classList.remove('show');
+        resolve(result);
+      };
+      document.getElementById('customModalOk').addEventListener('click', ()=>close(true), { once:true });
+      document.getElementById('customModalCancel').addEventListener('click', ()=>close(false), { once:true });
+    });
+  }
+
+  function showPrompt(message, title='Escribe un valor', defaultValue='', icon='✏️'){
+    return new Promise(resolve=>{
+      const modal = document.getElementById('customModal');
+      document.getElementById('customModalIcon').textContent = icon;
+      document.getElementById('customModalTitle').textContent = title;
+      document.getElementById('customModalText').innerHTML = `${message}<br><input type="text" id="customModalInput" value="${defaultValue}" style="margin-top:12px; width:100%; padding:10px; background:var(--asphalt); border:1px solid var(--line); color:var(--paper); font-family:'Work Sans',sans-serif;" placeholder="Escribe aquí...">`;
+      document.getElementById('customModalButtons').innerHTML = `
+        <button class="btn-cancel" id="customModalCancel">Cancelar</button>
+        <button class="btn-confirm" id="customModalOk">Aceptar</button>
+      `;
+      modal.classList.add('show');
+      setTimeout(()=> document.getElementById('customModalInput').focus(), 50);
+      const close = (result)=>{
+        modal.classList.remove('show');
+        resolve(result);
+      };
+      document.getElementById('customModalOk').addEventListener('click', ()=>{
+        const val = document.getElementById('customModalInput').value;
+        close(val);
+      }, { once:true });
+      document.getElementById('customModalCancel').addEventListener('click', ()=>close(null), { once:true });
+      document.getElementById('customModalInput').addEventListener('keydown', e=>{
+        if(e.key === 'Enter') document.getElementById('customModalOk').click();
+      });
+    });
+  }
+
+  function showToast(message, type='info', duration=3000){
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(()=>{
+      toast.classList.add('out');
+      setTimeout(()=> toast.remove(), 300);
+    }, duration);
+  }
+
+  /* ===================== DATOS INICIALES (fallback) ===================== */
+  const defaultPageContent = {
+    'hero.eyebrow': 'Colección de la calle',
+    'hero.title.line1': 'Atrévete a marcar',
+    'hero.title.line2': 'la diferencia,',
+    'hero.title.line3': 'viste tu estilo,',
+    'hero.title.accent': 'viste NJ23',
+    'hero.description': 'Pantalonetas y ropa urbana con actitud: siluetas anchas, telas resistentes y detalles que no pasan desapercibidos en NJ23.',
+    'hero.cta.primary': 'Ver catálogo →',
+    'hero.cta.secondary': 'Cómo comprar',
+    'catalog.title': 'El catálogo',
+    'catalog.description': 'Piezas resistentes, pensadas para el asfalto, no para la vitrina.',
+    'band.eyebrow': 'Hecho para durar en la calle',
+    'band.title': 'Costuras reforzadas, cero excusas',
+    'band.description': 'Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.',
+    'band.stat1.value': '12',
+    'band.stat1.label': 'Talleres locales',
+    'band.stat2.value': '48H',
+    'band.stat2.label': 'Envío promedio',
+    'band.stat3.value': '4.8',
+    'band.stat3.label': 'Calificación',
+    'process.title': 'Cómo comprar',
+    'process.description': 'Tres pasos, sin vueltas.',
+    'process.step1.num': '01',
+    'process.step1.title': 'Elige tu talla',
+    'process.step1.text': 'Cada producto trae una guía de tallas basada en medidas reales, no de maniquí.',
+    'process.step2.num': '02',
+    'process.step2.title': 'Escríbenos por WhatsApp',
+    'process.step2.text': 'Confirmamos disponibilidad y coordinamos el pago en minutos.',
+    'process.step3.num': '03',
+    'process.step3.title': 'Recíbelo en casa',
+    'process.step3.text': 'Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.',
+    'cta.title': 'Tu próxima pieza favorita está en la calle',
+    'cta.button': 'Ver todo el catálogo →',
+    'footer.tagline': 'Ropa urbana hecha en la costa, para la calle.',
+    'footer.copyright': '© 2026 NJ23. Barranquilla, Colombia.',
+    'footer.slogan': 'Atrévete a marcar la diferencia, viste tu estilo, viste NJ23.',
+    'footer.contact.whatsapp': 'WhatsApp',
+    'footer.contact.instagram': 'Instagram',
+    'footer.contact.email': 'hola@nj23.co'
+  };
+
+  const defaultData = {
+    categories: [
+      { id: 'pantalonetas', name: 'Pantalonetas' },
+      { id: 'camisetas', name: 'Camisetas' },
+      { id: 'accesorios', name: 'Accesorios' }
+    ],
+    products: [
+      { id: 'p1', name: 'Pantaloneta Asfalto', cat: 'pantalonetas', price: 89900, sizes: [{size:'S',stock:5},{size:'M',stock:8},{size:'L',stock:4},{size:'XL',stock:2}], colors: ['#FFD400','#FF2E7E','#0F0F11'], tag: 'new', bg: '#2A2A2E', svg: 'shorts' },
+      { id: 'p2', name: 'Camiseta Bloque', cat: 'camisetas', price: 64900, sizes: [{size:'S',stock:3},{size:'M',stock:6},{size:'L',stock:5},{size:'XL',stock:1}], colors: ['#0F0F11','#F1EFE6'], tag: '', bg: '#26262A', svg: 'shirt' },
+      { id: 'p3', name: 'Pantaloneta NJ23', cat: 'pantalonetas', price: 79900, sizes: [{size:'S',stock:2},{size:'M',stock:7},{size:'L',stock:6},{size:'XL',stock:3}], colors: ['#FF2E7E','#0F0F11'], tag: 'best seller', bg: '#2E2A24', svg: 'shorts' },
+      { id: 'p4', name: 'Camiseta Muro', cat: 'camisetas', price: 59900, sizes: [{size:'S',stock:4},{size:'M',stock:9},{size:'L',stock:3},{size:'XL',stock:2}], colors: ['#FFD400','#0F0F11','#F1EFE6'], tag: '', bg: '#242428', svg: 'shirt' },
+      { id: 'p5', name: 'Gorra Barricada', cat: 'accesorios', price: 44900, sizes: [{size:'Única',stock:10}], colors: ['#0F0F11','#FFD400'], tag: '', bg: '#28282C', svg: 'cap' },
+      { id: 'p6', name: 'Pantaloneta Concreto', cat: 'pantalonetas', price: 84900, sizes: [{size:'S',stock:6},{size:'M',stock:4},{size:'L',stock:5},{size:'XL',stock:2}], colors: ['#F1EFE6','#0F0F11'], tag: '', bg: '#2A2626', svg: 'shorts' }
+    ],
+    pageContent: defaultPageContent
+  };
+
+  /* ===================== ESTADO ===================== */
+  let appData = { categories: [], products: [] };
+  let githubSha = null;
+  let productPage = 1;
+  let productPerPage = 10;
+  let editingProductId = null;
+  let pendingImageFile = null;
+  let pendingImagePath = null;
+  let autoSaveTimer = null;
+  let pageLoaded = false;
+  let hasLocalChanges = false;
+
+  /* ===================== GITHUB CONFIG ===================== */
+  function getGithubConfig(){
+    const raw = localStorage.getItem(STORAGE_GH);
+    if(raw){
+      const cfg = JSON.parse(raw);
+      return { token: cfg.token || DEFAULT_GH_TOKEN, owner: cfg.owner || 'JeanFranco2805', repo: cfg.repo || 'NJ23', path: cfg.path || 'catalogo.json', branch: cfg.branch || 'main' };
+    }
+    return { token: DEFAULT_GH_TOKEN, owner:'JeanFranco2805', repo:'NJ23', path:'catalogo.json', branch:'main' };
+  }
+  function saveGithubConfig(cfg){ localStorage.setItem(STORAGE_GH, JSON.stringify(cfg)); }
+
+  function isLoggedIn(){ return localStorage.getItem(STORAGE_SESSION) === '1'; }
+  function setLoggedIn(v){ v ? localStorage.setItem(STORAGE_SESSION, '1') : localStorage.removeItem(STORAGE_SESSION); }
+
+  /* ===================== CARGAR CATÁLOGO ===================== */
+  async function loadCatalog(){
+    let remoteData = null;
+    try{
+      const res = await fetch(CATALOG_URL + '?nocache=' + Date.now(), { cache: 'no-store' });
+      if(!res.ok) throw new Error('No se pudo cargar catalogo.json');
+      remoteData = await res.json();
+    }catch(err){
+      console.warn('No se pudo cargar catalogo.json:', err);
+    }
+
+    const backup = localStorage.getItem(STORAGE_BACKUP);
+    if(backup){
+      try{
+        const backupData = JSON.parse(backup);
+        const remoteString = remoteData ? JSON.stringify(remoteData) : '';
+        const backupString = JSON.stringify(backupData);
+        if(remoteString && remoteString === backupString){
+          // ya están sincronizados, limpiar backup
+          clearLocalBackup();
+          appData = remoteData;
+          hasLocalChanges = false;
+        } else {
+          appData = backupData;
+          hasLocalChanges = true;
+          showToast('Cambios guardados. Se publicarán automáticamente en la web.', 'info', 5000);
+        }
+      }catch(e){
+        appData = remoteData || JSON.parse(JSON.stringify(defaultData));
+        hasLocalChanges = false;
+      }
+    } else {
+      appData = remoteData || JSON.parse(JSON.stringify(defaultData));
+      hasLocalChanges = false;
+    }
+    if(!appData.pageContent) appData.pageContent = JSON.parse(JSON.stringify(defaultPageContent));
+    applyPageContent();
+    renderAll();
+    updatePublishStatus();
+  }
+
+  /* ===================== GITHUB API ===================== */
+  function githubApiUrl(cfg, path){
+    return `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${cfg.branch}`;
+  }
+
+  async function fetchFromGithub(cfg, path){
+    const res = await fetch(githubApiUrl(cfg, path || cfg.path), {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${cfg.token}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    });
+    if(!res.ok){
+      const err = await res.json().catch(()=>({}));
+      throw new Error(err.message || `Error ${res.status}`);
+    }
+    return res.json();
+  }
+
+  async function uploadToGithub(cfg, path, contentBase64, message, sha){
+    const body = {
+      message: message || 'Actualización NJ23',
+      content: contentBase64,
+      branch: cfg.branch
+    };
+    if(sha) body.sha = sha;
+
+    const res = await fetch(githubApiUrl(cfg, path), {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${cfg.token}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    const data = await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.message || `Error ${res.status}`);
+    return data;
+  }
+
+  async function deleteFromGithub(cfg, path){
+    let sha = null;
+    try{
+      const existing = await fetchFromGithub(cfg, path);
+      sha = existing.sha;
+    }catch(e){ return false; }
+    if(!sha) return false;
+
+    const res = await fetch(githubApiUrl(cfg, path), {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${cfg.token}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'Eliminación de ' + path,
+        sha: sha,
+        branch: cfg.branch
+      })
+    });
+
+    if(!res.ok){
+      const data = await res.json().catch(()=>({}));
+      throw new Error(data.message || `Error ${res.status}`);
+    }
+    return true;
+  }
+
+  async function saveCatalogToGithub(cfg){
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(appData, null, 2))));
+    let currentSha = null;
+    try{
+      const existing = await fetchFromGithub(cfg);
+      currentSha = existing.sha;
+    }catch(e){
+      console.warn('No se pudo obtener SHA actual, intentando como archivo nuevo:', e);
+    }
+    const data = await uploadToGithub(cfg, cfg.path, content, 'Actualización de catálogo NJ23', currentSha);
+    githubSha = data.content.sha;
+    return data;
+  }
+
+  async function uploadImageToGithub(cfg, filename, base64){
+    const path = ASSETS_PATH + filename;
+    let sha = null;
+    try{
+      const existing = await fetchFromGithub(cfg, path);
+      sha = existing.sha;
+    }catch(e){ /* no existe, es nuevo */ }
+    const data = await uploadToGithub(cfg, path, base64, 'Subida de imagen ' + filename, sha);
+    return path;
+  }
+
+  async function doSaveToGithub(silent=false, attempt=1){
+    const cfg = getGithubConfig();
+    if(!cfg.token || !cfg.owner || !cfg.repo){
+      if(!silent) showToast('Configura GitHub en la pestaña Configuración para publicar cambios', 'error', 5000);
+      updatePublishStatus();
+      return false;
+    }
+    try{
+      await saveCatalogToGithub(cfg);
+      clearLocalBackup();
+      clearLocalChanges();
+      if(!silent) showToast('Cambios publicados en la web', 'success');
+      return true;
+    }catch(err){
+      console.warn('Auto-save falló:', err);
+      if(attempt < 3 && err.message && err.message.includes('does not match')){
+        console.warn('SHA desactualizado, reintentando...');
+        githubSha = null;
+        await new Promise(r => setTimeout(r, 1000));
+        return doSaveToGithub(silent, attempt + 1);
+      }
+      if(!silent) showToast('No se pudieron publicar los cambios: ' + err.message, 'error', 8000);
+      updatePublishStatus();
+      return false;
+    }
+  }
+
+  let saveRetryTimer = null;
+
+  function scheduleAutoSave(){
+    if(!pageLoaded) return;
+    if(autoSaveTimer) clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(()=>{
+      queueAutoSave();
+    }, 2000);
+  }
+
+  async function queueAutoSave(){
+    if(saveRetryTimer) clearTimeout(saveRetryTimer);
+    const ok = await doSaveToGithub(true);
+    if(!ok){
+      saveRetryTimer = setTimeout(()=>{
+        console.log('Reintentando publicar cambios...');
+        queueAutoSave();
+      }, 5000);
+    }
+  }
+
+  /* ===================== UTILIDADES ===================== */
+  function getSvg(name){
+    if(name === 'shirt') return SVG_SHIRT;
+    if(name === 'cap') return SVG_CAP;
+    return SVG_SHORTS;
+  }
+  function formatPrice(n){ return '$' + n.toLocaleString('es-CO'); }
+  function sanitizeFilename(name){
+    return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9.]+/g, '-').replace(/^-|-$/g, '');
+  }
+  function imageUrl(path){
+    if(!path) return null;
+    if(path.startsWith('http://') || path.startsWith('https://')) return path;
+    // usar ruta relativa para que funcione tanto en localhost como en GitHub Pages,
+    // incluso si se configura un dominio personalizado
+    return path;
+  }
+  function fileToBase64(file){
+    return new Promise((resolve, reject)=>{
+      const reader = new FileReader();
+      reader.onload = ()=> resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function fileToBase64Content(file){
+    return new Promise((resolve, reject)=>{
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        const base64 = reader.result.split(',')[1];
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ===================== RENDER CATÁLOGO ===================== */
+  function renderFilters(){
+    const container = document.getElementById('filters');
+    container.innerHTML = `<button class="filter-btn active" data-filter="all">Todo</button>` +
+      appData.categories.map(c => `<button class="filter-btn" data-filter="${c.id}">${c.name}</button>`).join('');
+
+    container.querySelectorAll('.filter-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        container.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        filterProducts(btn.dataset.filter);
+      });
+    });
+  }
+
+  function filterProducts(filter){
+    document.querySelectorAll('#productGrid .card').forEach(c=>{
+      const show = filter === 'all' || c.dataset.cat === filter;
+      c.style.display = show ? '' : 'none';
+    });
+  }
+
+  function renderProducts(){
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = '';
+    appData.products.forEach(p=>{
+      const tagHtml = p.tag ? `<span class="card-tag ${p.tag === 'new' ? 'new' : ''}">${p.tag}</span>` : '';
+      const colorsHtml = (p.colors || []).map(col => `<span class="swatch" style="background:${col}"></span>`).join('');
+      const sizes = p.sizes || [];
+      const sizesHtml = sizes.length ? `
+        <div class="sizes-row">
+          ${sizes.map((s, idx) => `<button type="button" class="size-btn ${s.stock <= 0 ? 'out-of-stock' : ''}" data-size-idx="${idx}">${s.size}</button>`).join('')}
+        </div>
+        <div class="stock-info" id="stock-${p.id}"></div>
+      ` : '';
+      const imgUrl = imageUrl(p.image);
+      const card = document.createElement('div');
+      card.className = 'card reveal';
+      card.dataset.cat = p.cat;
+      card.dataset.productId = p.id;
+      card.innerHTML = `
+        <div class="card-media" style="background:${p.bg};">
+          ${tagHtml}
+          <div class="card-media-inner"></div>
+        </div>
+        <div class="card-body">
+          <span class="cat">${categoryName(p.cat)}</span>
+          <h3>${p.name}</h3>
+          <div class="card-foot">
+            <div class="swatches">${colorsHtml}</div>
+            <span class="price">${formatPrice(p.price)}</span>
+          </div>
+          ${sizesHtml}
+        </div>
+      `;
+      const mediaInner = card.querySelector('.card-media-inner');
+      if(imgUrl){
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = p.name;
+        img.loading = 'lazy';
+        img.onerror = ()=>{
+          mediaInner.innerHTML = getSvg(p.svg);
+        };
+        mediaInner.appendChild(img);
+      } else {
+        mediaInner.innerHTML = getSvg(p.svg);
+      }
+      const body = card.querySelector('.card-body');
+      const btn = document.createElement('a');
+      btn.dataset.selectedSize = '';
+      btn.href = waLink(`Hola! Quiero pedir: ${p.name} - ${formatPrice(p.price)}`);
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
+      btn.className = 'card-wa';
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2zm5.8 14.14c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.93-4.36-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.15.3-.29.46-.14.16-.3.36-.43.48-.14.13-.29.28-.13.55.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.29 2.32 1.44.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.43.19.5.3.06.11.06.63-.18 1.31z"/></svg><span>Pedir por WhatsApp</span>';
+      body.appendChild(btn);
+
+      // manejar selector de tallas
+      if(sizes.length){
+        const sizeBtns = card.querySelectorAll('.size-btn');
+        const stockInfo = card.querySelector(`#stock-${p.id}`);
+        const updateWaLink = ()=>{
+          const selected = card.querySelector('.size-btn.active');
+          const sizeData = selected ? sizes[selected.dataset.sizeIdx] : null;
+          let msg = `Hola! Quiero pedir: ${p.name} - ${formatPrice(p.price)}`;
+          if(sizeData && sizeData.stock > 0){
+            msg += ` (Talla: ${sizeData.size})`;
+            btn.dataset.selectedSize = sizeData.size;
+          } else {
+            btn.dataset.selectedSize = '';
+          }
+          btn.href = waLink(msg);
+        };
+        sizeBtns.forEach((sb, idx)=>{
+          sb.addEventListener('click', ()=>{
+            if(sizes[idx].stock <= 0) return;
+            sizeBtns.forEach(b=>b.classList.remove('active'));
+            sb.classList.add('active');
+            stockInfo.textContent = `Disponible: ${sizes[idx].stock} unidades`;
+            updateWaLink();
+          });
+        });
+      }
+
+      grid.appendChild(card);
+    });
+
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }
+
+  function categoryName(id){
+    const c = appData.categories.find(x => x.id === id);
+    return c ? c.name : id;
+  }
+
+  function renderFooterCatalog(){
+    const ul = document.getElementById('footerCatalog');
+    ul.innerHTML = appData.categories.map(c => `<li><a href="#coleccion">${c.name}</a></li>`).join('');
+  }
+
+  function saveLocalBackup(){
+    try{
+      localStorage.setItem(STORAGE_BACKUP, JSON.stringify(appData));
+    }catch(e){
+      console.warn('No se pudo guardar backup local:', e);
+    }
+  }
+
+  function clearLocalBackup(){
+    localStorage.removeItem(STORAGE_BACKUP);
+  }
+
+  function renderAll(){
+    renderFilters();
+    renderProducts();
+    renderFooterCatalog();
+    renderAdminProductTable();
+    renderAdminCategories();
+    saveLocalBackup();
+    scheduleAutoSave();
+    if(pageLoaded) markLocalChanges();
+  }
+
+  /* ===================== EDICIÓN INLINE DE CONTENIDO ===================== */
+  function getPageContent(key, fallback=''){
+    const content = appData.pageContent || {};
+    return content[key] !== undefined ? content[key] : fallback;
+  }
+
+  function setPageContent(key, value){
+    if(!appData.pageContent) appData.pageContent = {};
+    appData.pageContent[key] = value;
+    saveLocalBackup();
+    scheduleAutoSave();
+    markLocalChanges();
+  }
+
+  function applyPageContent(){
+    const content = appData.pageContent || {};
+    document.querySelectorAll('[data-edit-key]').forEach(el=>{
+      const key = el.dataset.editKey;
+      if(content[key] !== undefined){
+        if(el.tagName === 'A' || el.tagName === 'BUTTON'){
+          el.textContent = content[key];
+        } else {
+          el.textContent = content[key];
+        }
+      }
+    });
+  }
+
+  function setupInlineEditing(){
+    document.body.classList.add('editing');
+    document.querySelectorAll('[data-edit-key]').forEach(el=>{
+      el.addEventListener('dblclick', handleContentEdit);
+    });
+  }
+
+  function removeInlineEditing(){
+    document.body.classList.remove('editing');
+    document.querySelectorAll('[data-edit-key]').forEach(el=>{
+      el.removeEventListener('dblclick', handleContentEdit);
+      el.contentEditable = 'false';
+    });
+  }
+
+  function handleContentEdit(e){
+    e.preventDefault();
+    const el = e.currentTarget;
+    if(el.isContentEditable) return;
+    el.contentEditable = 'true';
+    el.focus();
+    // seleccionar todo el texto
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    const saveEdit = async ()=>{
+      const key = el.dataset.editKey;
+      const newText = el.textContent.trim();
+      if(newText && newText !== getPageContent(key)){
+        setPageContent(key, newText);
+        showToast('Texto actualizado. Publicando...', 'info');
+        const published = await doSaveToGithub(false);
+        if(!published){
+          showToast('Texto guardado localmente. Recuerda publicar para la web.', 'warning', 5000);
+        }
+      }
+      el.contentEditable = 'false';
+      el.blur();
+    };
+
+    const onBlur = ()=>{
+      saveEdit();
+      el.removeEventListener('blur', onBlur);
+      el.removeEventListener('keydown', onKeydown);
+    };
+
+    const onKeydown = (ev)=>{
+      if(ev.key === 'Enter'){
+        ev.preventDefault();
+        saveEdit();
+        el.removeEventListener('blur', onBlur);
+        el.removeEventListener('keydown', onKeydown);
+      } else if(ev.key === 'Escape'){
+        el.textContent = getPageContent(key);
+        el.contentEditable = 'false';
+        el.removeEventListener('blur', onBlur);
+        el.removeEventListener('keydown', onKeydown);
+      }
+    };
+
+    el.addEventListener('blur', onBlur, { once:true });
+    el.addEventListener('keydown', onKeydown);
+  }
+
+  /* ===================== ADMIN PANEL ===================== */
+  function updateAdminUI(){
+    const logged = isLoggedIn();
+    document.getElementById('adminBar').classList.toggle('show', logged);
+    document.getElementById('adminBtn').style.display = logged ? 'block' : 'none';
+    document.getElementById('loginBtn').textContent = logged ? 'Cerrar sesión' : 'Iniciar sesión';
+    if(logged){
+      setupInlineEditing();
+    } else {
+      removeInlineEditing();
+    }
+  }
+
+  function openModal(id){ document.getElementById(id).classList.add('show'); }
+  function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+
+  /* ---------- tabla de productos con paginado ---------- */
+  function renderAdminProductTable(){
+    const tbody = document.getElementById('adminProductTableBody');
+    tbody.innerHTML = '';
+    const total = appData.products.length;
+    const totalPages = Math.max(1, Math.ceil(total / productPerPage));
+    if(productPage > totalPages) productPage = totalPages;
+    const start = (productPage - 1) * productPerPage;
+    const end = start + productPerPage;
+    const pageItems = appData.products.slice(start, end);
+
+    pageItems.forEach((p, idx)=>{
+      const realIdx = start + idx;
+      const imgUrl = imageUrl(p.image);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="td-thumb"></td>
+        <td><strong>${p.name}</strong></td>
+        <td>${categoryName(p.cat)}</td>
+        <td>${formatPrice(p.price)}</td>
+        <td>${p.tag || '-'}</td>
+        <td class="actions">
+          <button class="btn-small edit" data-idx="${realIdx}">Editar</button>
+          <button class="btn-small delete" data-idx="${realIdx}">Eliminar</button>
+        </td>
+      `;
+      const tdThumb = tr.querySelector('.td-thumb');
+      if(imgUrl){
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.className = 'thumb';
+        img.alt = '';
+        img.onerror = ()=>{
+          tdThumb.innerHTML = '<div class="thumb" style="display:flex;align-items:center;justify-content:center;">' + getSvg(p.svg) + '</div>';
+        };
+        tdThumb.appendChild(img);
+      } else {
+        tdThumb.innerHTML = '<div class="thumb" style="display:flex;align-items:center;justify-content:center;">' + getSvg(p.svg) + '</div>';
+      }
+      tr.querySelector('.edit').addEventListener('click', ()=> openProductForm(realIdx));
+      tr.querySelector('.delete').addEventListener('click', async ()=>{
+        const ok = await showConfirm('¿Eliminar este producto?', 'Eliminar producto', '🗑️');
+        if(!ok) return;
+        appData.products.splice(realIdx,1);
+        saveLocalBackup();
+        renderAll();
+        showToast('Producto eliminado. Guardando...', 'info');
+        const published = await doSaveToGithub(false);
+        if(!published){
+          showToast('Producto eliminado localmente. Recuerda publicar para guardar en la web.', 'warning', 5000);
+        }
+      });
+      tbody.appendChild(tr);
+    });
+
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages){
+    const container = document.getElementById('productPagination');
+    let html = `
+      <button class="page-btn" id="prevPage" ${productPage <= 1 ? 'disabled' : ''}>← Ant</button>
+      <div class="pages">
+    `;
+    for(let i=1; i<=totalPages; i++){
+      html += `<button class="page-btn ${i === productPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+    html += `</div><button class="page-btn" id="nextPage" ${productPage >= totalPages ? 'disabled' : ''}>Sig →</button>`;
+    container.innerHTML = html;
+
+    container.querySelectorAll('[data-page]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        productPage = Number(btn.dataset.page);
+        renderAdminProductTable();
+      });
+    });
+    document.getElementById('prevPage').addEventListener('click', ()=>{
+      if(productPage > 1){ productPage--; renderAdminProductTable(); }
+    });
+    document.getElementById('nextPage').addEventListener('click', ()=>{
+      if(productPage < totalPages){ productPage++; renderAdminProductTable(); }
+    });
+  }
+
+  /* ---------- formulario de producto ---------- */
+  function openProductForm(idx){
+    editingProductId = idx !== undefined ? appData.products[idx].id : null;
+    const p = editingProductId ? appData.products.find(x=>x.id === editingProductId) : null;
+
+    document.getElementById('productModalTitle').textContent = p ? 'Editar producto' : 'Nuevo producto';
+    document.getElementById('pName').value = p ? p.name : '';
+    document.getElementById('pPrice').value = p ? p.price : '';
+    document.getElementById('pBg').value = p ? p.bg : '#2A2A2E';
+    document.getElementById('pSvg').value = p ? p.svg : 'shorts';
+    document.getElementById('pImageUrl').value = p ? (p.image || '') : '';
+    document.getElementById('pImageFile').value = '';
+    pendingImageFile = null;
+    pendingImagePath = null;
+
+    // categorías
+    const catSelect = document.getElementById('pCat');
+    catSelect.innerHTML = appData.categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+    catSelect.value = p ? p.cat : (appData.categories[0] ? appData.categories[0].id : '');
+
+    // etiqueta
+    const presetTags = ['', 'new', 'best seller', 'oferta'];
+    const tagSelect = document.getElementById('pTag');
+    if(p && !presetTags.includes(p.tag)){
+      tagSelect.value = '';
+      document.getElementById('pTagCustom').value = p.tag;
+    } else {
+      tagSelect.value = p ? p.tag : '';
+      document.getElementById('pTagCustom').value = '';
+    }
+
+    // colores
+    renderColorInputs((p && p.colors) ? p.colors : ['#FFD400']);
+
+    // tallas
+    renderSizeInputs((p && p.sizes) ? p.sizes : [{size:'M', stock:1}]);
+
+    updateImagePreview();
+    openModal('productModal');
+  }
+
+  function renderSizeInputs(sizes){
+    const container = document.getElementById('pSizes');
+    container.innerHTML = '';
+    sizes.forEach((s, idx)=>{
+      const row = document.createElement('div');
+      row.className = 'size-form-row';
+      row.innerHTML = `
+        <input type="text" value="${s.size}" placeholder="Talla" data-size-text="${idx}">
+        <input type="number" value="${s.stock}" placeholder="Stock" data-stock="${idx}" min="0">
+        <button type="button" class="btn-remove-color" data-remove-idx="${idx}">×</button>
+      `;
+      row.querySelector('.btn-remove-color').addEventListener('click', ()=>{
+        const current = getFormSizes();
+        current.splice(idx, 1);
+        renderSizeInputs(current.length ? current : [{size:'M', stock:1}]);
+      });
+      container.appendChild(row);
+    });
+  }
+
+  function getFormSizes(){
+    const rows = document.querySelectorAll('#pSizes .size-form-row');
+    return Array.from(rows).map(row => {
+      const size = row.querySelector('input[type="text"]').value.trim();
+      const stock = Number(row.querySelector('input[type="number"]').value);
+      return { size: size || 'M', stock: isNaN(stock) ? 0 : stock };
+    }).filter(s => s.size);
+  }
+
+  function renderColorInputs(colors){
+    const container = document.getElementById('pColors');
+    container.innerHTML = '';
+    colors.forEach((col, idx)=>{
+      const chip = document.createElement('div');
+      chip.className = 'color-chip';
+      chip.innerHTML = `
+        <input type="color" value="${col}" data-color-idx="${idx}">
+        <input type="text" value="${col}" placeholder="#HEX" data-color-text="${idx}">
+        <button type="button" class="btn-remove-color" data-remove-idx="${idx}">×</button>
+      `;
+      chip.querySelector('input[type="color"]').addEventListener('input', e=>{
+        chip.querySelector('input[type="text"]').value = e.target.value;
+      });
+      chip.querySelector('input[type="text"]').addEventListener('input', e=>{
+        const val = e.target.value;
+        if(/^#[0-9A-Fa-f]{6}$/.test(val)){
+          chip.querySelector('input[type="color"]').value = val;
+        }
+      });
+      chip.querySelector('.btn-remove-color').addEventListener('click', ()=>{
+        const current = getFormColors();
+        current.splice(idx, 1);
+        renderColorInputs(current.length ? current : ['#FFFFFF']);
+      });
+      container.appendChild(chip);
+    });
+  }
+
+  function getFormColors(){
+    const inputs = document.querySelectorAll('#pColors input[type="text"]');
+    return Array.from(inputs).map(i => i.value).filter(v => v);
+  }
+
+  function updateImagePreview(){
+    const url = document.getElementById('pImageUrl').value.trim();
+    const preview = document.getElementById('pImagePreview');
+    if(url){
+      preview.src = url;
+      preview.classList.add('show');
+    } else if(pendingImageFile){
+      preview.src = URL.createObjectURL(pendingImageFile);
+      preview.classList.add('show');
+    } else {
+      preview.src = '';
+      preview.classList.remove('show');
+    }
+  }
+
+  async function saveProductForm(){
+    const name = document.getElementById('pName').value.trim();
+    const price = Number(document.getElementById('pPrice').value);
+    const cat = document.getElementById('pCat').value;
+    const bg = document.getElementById('pBg').value;
+    const svg = document.getElementById('pSvg').value;
+    const colors = getFormColors();
+    const sizes = getFormSizes();
+    const tagSelect = document.getElementById('pTag').value;
+    const tagCustom = document.getElementById('pTagCustom').value.trim();
+    const tag = tagCustom || tagSelect;
+    const imageUrlVal = document.getElementById('pImageUrl').value.trim();
+
+    if(!name){ await showAlert('El nombre es obligatorio', 'Faltan datos', '⚠️'); return; }
+    if(!price || price < 0){ await showAlert('El precio no es válido', 'Faltan datos', '⚠️'); return; }
+    if(!cat){ await showAlert('Selecciona una categoría', 'Faltan datos', '⚠️'); return; }
+
+    let imagePath = imageUrlVal;
+    if(pendingImageFile){
+      const btn = document.getElementById('saveProduct');
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Procesando imagen...';
+      try{
+        imagePath = await fileToBase64(pendingImageFile);
+      }catch(err){
+        await showAlert('Error al procesar imagen: ' + err.message, 'Error', '❌');
+        btn.disabled = false;
+        btn.textContent = originalText;
+        return;
+      }
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+
+    const productData = {
+      id: editingProductId || ('p' + Date.now()),
+      name,
+      cat,
+      price,
+      sizes,
+      colors,
+      tag,
+      bg,
+      svg,
+      image: imagePath || undefined
+    };
+
+    if(editingProductId){
+      const idx = appData.products.findIndex(x => x.id === editingProductId);
+      appData.products[idx] = productData;
+    } else {
+      appData.products.push(productData);
+    }
+
+    pendingImageFile = null;
+    pendingImagePath = null;
+    closeModal('productModal');
+    saveLocalBackup();
+    renderAll();
+    showToast('Guardando producto...', 'info');
+    const published = await doSaveToGithub(false);
+    if(!published){
+      showToast('Producto guardado localmente. Recuerda publicar para la web.', 'warning', 5000);
+    }
+  }
+
+  /* ---------- categorías ---------- */
+  function renderAdminCategories(){
+    const list = document.getElementById('adminCategoryList');
+    list.innerHTML = '';
+    appData.categories.forEach((c, idx)=>{
+      const item = document.createElement('div');
+      item.className = 'admin-item';
+      item.innerHTML = `
+        <input class="cat-input" value="${c.name}" placeholder="Nombre del catálogo">
+        <span class="mono" style="color:var(--paper-45); font-size:12px;">ID: ${c.id}</span>
+        <div style="display:flex; gap:6px; justify-content:flex-end;">
+          <button class="btn-icon save" title="Guardar">✓</button>
+          <button class="btn-icon delete" title="Eliminar">×</button>
+        </div>
+      `;
+      item.querySelector('.save').addEventListener('click', async ()=>{
+        const newName = item.querySelector('input').value.trim();
+        if(!newName){ await showAlert('El nombre no puede estar vacío', 'Faltan datos', '⚠️'); return; }
+        appData.categories[idx].name = newName;
+        saveLocalBackup();
+        renderAll();
+        showToast('Catálogo actualizado. Publicando...', 'info');
+        const published = await doSaveToGithub(false);
+        if(!published){
+          showToast('Catálogo guardado localmente. Recuerda publicar.', 'warning', 5000);
+        }
+        item.style.borderColor = 'var(--green)';
+        setTimeout(()=> item.style.borderColor = '', 600);
+      });
+      item.querySelector('.delete').addEventListener('click', async ()=>{
+        const ok = await showConfirm('¿Eliminar este catálogo? Los productos asociados quedarán sin categoría.', 'Eliminar catálogo', '🗑️');
+        if(!ok) return;
+        appData.categories.splice(idx,1);
+        saveLocalBackup();
+        renderAll();
+        showToast('Catálogo eliminado. Publicando...', 'info');
+        const published = await doSaveToGithub(false);
+        if(!published){
+          showToast('Catálogo eliminado localmente. Recuerda publicar.', 'warning', 5000);
+        }
+      });
+      list.appendChild(item);
+    });
+  }
+
+  /* ---------- github config ---------- */
+  function loadGithubForm(){
+    const cfg = getGithubConfig();
+    document.getElementById('ghToken').value = cfg.token || DEFAULT_GH_TOKEN;
+    document.getElementById('ghOwner').value = cfg.owner || 'JeanFranco2805';
+    document.getElementById('ghRepo').value = cfg.repo || 'NJ23';
+    document.getElementById('ghPath').value = cfg.path || 'catalogo.json';
+    document.getElementById('ghBranch').value = cfg.branch || 'main';
+    if(!cfg.token){
+      updateGithubStatus(false, 'Falta token');
+      return;
+    }
+    updateGithubStatus(false, 'Falta probar conexión');
+  }
+
+  function readGithubForm(){
+    return {
+      token: document.getElementById('ghToken').value.trim(),
+      owner: document.getElementById('ghOwner').value.trim(),
+      repo: document.getElementById('ghRepo').value.trim(),
+      path: document.getElementById('ghPath').value.trim() || 'catalogo.json',
+      branch: document.getElementById('ghBranch').value.trim() || 'main'
+    };
+  }
+
+  function updateGithubStatus(ok, text){
+    const dot = document.getElementById('statusDot');
+    const txt = document.getElementById('statusText');
+    if(dot) dot.className = 'status-dot ' + (ok ? 'ok' : 'bad');
+    if(txt) txt.textContent = text;
+  }
+
+  function updatePublishStatus(){
+    const wrapper = document.getElementById('publishStatus');
+    const dot = document.getElementById('adminStatusDot');
+    const txt = document.getElementById('adminStatusText');
+    if(!wrapper || !dot || !txt) return;
+    const cfg = getGithubConfig();
+    const configured = cfg.token && cfg.owner && cfg.repo;
+
+    if(!configured){
+      wrapper.className = 'publish-status error';
+      dot.className = 'status-dot';
+      txt.textContent = hasLocalChanges ? 'Cambios sin publicar: falta GitHub' : 'Falta configurar GitHub';
+      return;
+    }
+
+    if(hasLocalChanges){
+      wrapper.className = 'publish-status pending';
+      dot.className = 'status-dot';
+      txt.textContent = 'Cambios no publicados';
+    } else {
+      wrapper.className = 'publish-status';
+      dot.className = 'status-dot';
+      txt.textContent = 'Sincronizado';
+    }
+  }
+
+  function markLocalChanges(){
+    hasLocalChanges = true;
+    updatePublishStatus();
+  }
+
+  function clearLocalChanges(){
+    hasLocalChanges = false;
+    updatePublishStatus();
+  }
+
+  function showGithubNote(type, html){
+    const note = document.getElementById('githubNote');
+    note.className = 'admin-note ' + (type === 'error' ? 'error' : type === 'success' ? 'success' : '');
+    note.innerHTML = html;
+  }
+
+  /* ===================== EVENTOS ===================== */
+  document.getElementById('loginBtn').addEventListener('click', ()=>{
+    if(isLoggedIn()){
+      setLoggedIn(false);
+      updateAdminUI();
+      closeModal('adminModal');
+    } else {
+      openModal('loginModal');
+      document.getElementById('loginPass').focus();
+    }
+  });
+
+  document.getElementById('adminBtn').addEventListener('click', ()=>{
+    renderAdminProductTable();
+    renderAdminCategories();
+    loadGithubForm();
+    openModal('adminModal');
+  });
+
+  document.getElementById('doLogin').addEventListener('click', ()=>{
+    const pass = document.getElementById('loginPass').value;
+    if(pass === ADMIN_PASSWORD){
+      setLoggedIn(true);
+      updateAdminUI();
+      closeModal('loginModal');
+      document.getElementById('loginPass').value = '';
+      document.getElementById('loginError').style.display = 'none';
+      renderAdminProductTable();
+      renderAdminCategories();
+      loadGithubForm();
+      openModal('adminModal');
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  });
+
+  document.getElementById('loginPass').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('doLogin').click(); });
+
+  document.querySelectorAll('[data-close]').forEach(btn=>{
+    btn.addEventListener('click', ()=> closeModal(btn.dataset.close));
+  });
+
+  document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+    overlay.addEventListener('click', e=>{ if(e.target === overlay) overlay.classList.remove('show'); });
+  });
+
+  document.querySelectorAll('.admin-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  document.getElementById('addProduct').addEventListener('click', ()=> openProductForm());
+  document.getElementById('saveProduct').addEventListener('click', saveProductForm);
+  document.getElementById('cancelProduct').addEventListener('click', ()=> closeModal('productModal'));
+  document.getElementById('addColor').addEventListener('click', ()=>{
+    const colors = getFormColors();
+    colors.push('#FFFFFF');
+    renderColorInputs(colors);
+  });
+  document.getElementById('addSize').addEventListener('click', ()=>{
+    const sizes = getFormSizes();
+    sizes.push({size:'', stock:1});
+    renderSizeInputs(sizes);
+  });
+  document.getElementById('pImageUrl').addEventListener('input', updateImagePreview);
+  document.getElementById('pImageFile').addEventListener('change', e=>{
+    pendingImageFile = e.target.files[0] || null;
+    document.getElementById('pImageUrl').value = '';
+    updateImagePreview();
+  });
+  document.getElementById('itemsPerPage').addEventListener('change', e=>{
+    productPerPage = Number(e.target.value);
+    productPage = 1;
+    renderAdminProductTable();
+  });
+
+  document.getElementById('addCategory').addEventListener('click', async ()=>{
+    const name = await showPrompt('Nombre del nuevo catálogo:', 'Crear catálogo');
+    if(!name || !name.trim()) return;
+    const id = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if(appData.categories.some(c=>c.id===id)){ await showAlert('Ya existe un catálogo con ese identificador.', 'Error', '❌'); return; }
+    appData.categories.push({ id, name: name.trim() });
+    saveLocalBackup();
+    renderAll();
+    showToast('Catálogo creado. Publicando...', 'info');
+    const published = await doSaveToGithub(false);
+    if(!published){
+      showToast('Catálogo creado localmente. Recuerda publicar.', 'warning', 5000);
+    }
+  });
+
+  document.getElementById('testGithub').addEventListener('click', async ()=>{
+    const cfg = readGithubForm();
+    if(!cfg.token || !cfg.owner || !cfg.repo){
+      showGithubNote('error', 'Completa la clave de acceso, usuario y repositorio.');
+      updateGithubStatus(false, 'Faltan datos');
+      return;
+    }
+    saveGithubConfig(cfg);
+    updateGithubStatus(false, 'Probando...');
+    try{
+      const data = await fetchFromGithub(cfg);
+      githubSha = data.sha;
+      if(data.content){
+        const decoded = decodeURIComponent(escape(atob(data.content.content || data.content)));
+        const remoteData = JSON.parse(decoded);
+        appData = remoteData;
+        renderAll();
+      }
+      updateGithubStatus(true, 'Conectado. Catálogo cargado.');
+      showGithubNote('success', 'Conexión exitosa. Los datos fueron cargados.');
+    }catch(err){
+      updateGithubStatus(false, 'Error: ' + err.message);
+      showGithubNote('error', 'Error al conectar: ' + err.message);
+    }
+  });
+
+  document.getElementById('saveGithub').addEventListener('click', async ()=>{
+    const cfg = readGithubForm();
+    if(!cfg.token || !cfg.owner || !cfg.repo){
+      showGithubNote('error', 'Completa la clave de acceso, usuario y repositorio antes de publicar.');
+      return;
+    }
+    saveGithubConfig(cfg);
+    const btn = document.getElementById('saveGithub');
+    btn.disabled = true;
+    btn.textContent = 'Publicando...';
+    const ok = await doSaveToGithub(false);
+    btn.disabled = false;
+    btn.textContent = '💾 Publicar cambios ahora';
+    if(ok){
+      updateGithubStatus(true, 'Publicado en la web');
+      showGithubNote('success', 'Cambios publicados correctamente. Pueden tardar unos minutos en verse en la web.');
+    }else{
+      updateGithubStatus(false, 'Error al publicar');
+      showGithubNote('error', 'No se pudo publicar. Revisa la clave de acceso y los permisos.');
+    }
+  });
+
+  document.getElementById('discardLocal').addEventListener('click', async ()=>{
+    const ok = await showConfirm('¿Descartar todos los cambios locales y volver a cargar el catálogo publicado?', 'Descartar cambios', '🗑️');
+    if(!ok) return;
+    clearLocalBackup();
+    showToast('Cambios descartados. Recargando...', 'info');
+    setTimeout(()=> location.reload(), 800);
+  });
+
+  document.getElementById('publishNowTop').addEventListener('click', async ()=>{
+    const btn = document.getElementById('publishNowTop');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Publicando...';
+    const ok = await doSaveToGithub(false);
+    btn.disabled = false;
+    btn.textContent = originalText;
+    if(!ok){
+      const cfg = getGithubConfig();
+      if(!cfg.token || !cfg.owner || !cfg.repo){
+        showToast('Ve a la pestaña Configuración y conecta GitHub antes de publicar.', 'error', 5000);
+      }
+    }
+  });
+
+  window.addEventListener('beforeunload', (e)=>{
+    if(hasLocalChanges){
+      e.preventDefault();
+      e.returnValue = 'Tienes cambios no publicados. Si sales ahora, se perderán si no tienes GitHub configurado.';
+    }
+  });
+
+  /* ===================== INICIO ===================== */
+  console.log('NJ23 Admin Panel v2.1 cargado');
+  if(location.protocol === 'file:'){
+    document.getElementById('fileWarning').style.display = 'block';
+  }
+  updateAdminUI();
+  loadCatalog().then(()=>{
+    pageLoaded = true;
+    updatePublishStatus();
+    scheduleAutoSave();
+  });
+</script>
 
 </body>
-
 </html>
