@@ -1,5 +1,6 @@
 {
   "categories": [
+<<<<<<< HEAD
     {
       "id": "pantalonetas",
       "name": "Pantalonetas"
@@ -12,6 +13,11 @@
       "id": "accesorios",
       "name": "Accesorios"
     }
+=======
+    { "id": "pantalonetas", "name": "Pantalonetas" },
+    { "id": "camisetas", "name": "Camisetas" },
+    { "id": "accesorios", "name": "Accesorios" }
+>>>>>>> master
   ],
   "products": [
     {
@@ -20,6 +26,7 @@
       "cat": "pantalonetas",
       "price": 89900,
       "sizes": [
+<<<<<<< HEAD
         {
           "size": "S",
           "stock": 5
@@ -42,6 +49,14 @@
         "#FF2E7E",
         "#0F0F11"
       ],
+=======
+        { "size": "S", "stock": 5 },
+        { "size": "M", "stock": 8 },
+        { "size": "L", "stock": 4 },
+        { "size": "XL", "stock": 2 }
+      ],
+      "colors": ["#FFD400", "#FF2E7E", "#0F0F11"],
+>>>>>>> master
       "tag": "new",
       "bg": "#2A2A2E",
       "svg": "shorts"
@@ -52,6 +67,7 @@
       "cat": "camisetas",
       "price": 64900,
       "sizes": [
+<<<<<<< HEAD
         {
           "size": "S",
           "stock": 3
@@ -73,6 +89,14 @@
         "#0F0F11",
         "#F1EFE6"
       ],
+=======
+        { "size": "S", "stock": 3 },
+        { "size": "M", "stock": 6 },
+        { "size": "L", "stock": 5 },
+        { "size": "XL", "stock": 1 }
+      ],
+      "colors": ["#0F0F11", "#F1EFE6"],
+>>>>>>> master
       "tag": "",
       "bg": "#26262A",
       "svg": "shirt"
@@ -83,6 +107,7 @@
       "cat": "pantalonetas",
       "price": 79900,
       "sizes": [
+<<<<<<< HEAD
         {
           "size": "S",
           "stock": 2
@@ -104,6 +129,14 @@
         "#FF2E7E",
         "#0F0F11"
       ],
+=======
+        { "size": "S", "stock": 2 },
+        { "size": "M", "stock": 7 },
+        { "size": "L", "stock": 6 },
+        { "size": "XL", "stock": 3 }
+      ],
+      "colors": ["#FF2E7E", "#0F0F11"],
+>>>>>>> master
       "tag": "best seller",
       "bg": "#2E2A24",
       "svg": "shorts"
@@ -114,6 +147,7 @@
       "cat": "camisetas",
       "price": 59900,
       "sizes": [
+<<<<<<< HEAD
         {
           "size": "S",
           "stock": 4
@@ -136,6 +170,14 @@
         "#0F0F11",
         "#F1EFE6"
       ],
+=======
+        { "size": "S", "stock": 4 },
+        { "size": "M", "stock": 9 },
+        { "size": "L", "stock": 3 },
+        { "size": "XL", "stock": 2 }
+      ],
+      "colors": ["#FFD400", "#0F0F11", "#F1EFE6"],
+>>>>>>> master
       "tag": "",
       "bg": "#242428",
       "svg": "shirt"
@@ -146,6 +188,7 @@
       "cat": "accesorios",
       "price": 44900,
       "sizes": [
+<<<<<<< HEAD
         {
           "size": "Única",
           "stock": 10
@@ -155,6 +198,11 @@
         "#0F0F11",
         "#FFD400"
       ],
+=======
+        { "size": "Única", "stock": 10 }
+      ],
+      "colors": ["#0F0F11", "#FFD400"],
+>>>>>>> master
       "tag": "",
       "bg": "#28282C",
       "svg": "cap"
@@ -165,6 +213,7 @@
       "cat": "pantalonetas",
       "price": 84900,
       "sizes": [
+<<<<<<< HEAD
         {
           "size": "S",
           "stock": 6
@@ -186,6 +235,14 @@
         "#F1EFE6",
         "#0F0F11"
       ],
+=======
+        { "size": "S", "stock": 6 },
+        { "size": "M", "stock": 4 },
+        { "size": "L", "stock": 5 },
+        { "size": "XL", "stock": 2 }
+      ],
+      "colors": ["#F1EFE6", "#0F0F11"],
+>>>>>>> master
       "tag": "",
       "bg": "#2A2626",
       "svg": "shorts"
@@ -231,4 +288,8 @@
     "footer.contact.instagram": "Instagram",
     "footer.contact.email": "hola@nj23.co"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
