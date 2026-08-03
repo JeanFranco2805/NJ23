@@ -297,13 +297,6 @@
   body.editing .edit-hint{display:block;}
   .admin-header{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:12px;}
   .admin-header h2{margin:0;}
-  .file-warning{background:#b00020; color:#fff; text-align:center; padding:12px; font-family:'Work Sans',sans-serif; font-size:14px; font-weight:700;}
-  .file-warning a{color:#ffeb3b; text-decoration:underline;}
-  .publish-status{display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--paper-70);}
-  .publish-status .status-dot{width:10px; height:10px; border-radius:50%; background:var(--green);}
-  .publish-status.pending .status-dot{background:var(--yellow); animation:pulse 1.2s infinite;}
-  .publish-status.error .status-dot{background:var(--red);}
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
   .admin-tabs{display:flex; gap:8px; margin-bottom:22px; border-bottom:1px solid var(--line); padding-bottom:12px;}
   .admin-tab{
     background:transparent; border:none; color:var(--paper-70); font-size:13px; font-weight:700;
@@ -491,10 +484,6 @@
 <body>
 
 <div class="hazard"></div>
-<div class="file-warning" id="fileWarning" style="display:none;">
-  Estás abriendo la página desde el archivo local. Los cambios no se sincronizarán bien.
-  <strong>Usa la web: https://jeanfranco2805.github.io/NJ23/via40-landing.html</strong>
-</div>
 <div class="admin-bar" id="adminBar">Modo administrador activo</div>
 
 <nav>
@@ -515,19 +504,19 @@
 <section class="hero">
   <div class="wrap hero-inner">
     <div>
-      <div class="eyebrow" data-edit-key="hero.eyebrow">Colección de la calle</div>
+      <div class="eyebrow" data-edit-key="hero_eyebrow">Colección de la calle</div>
       <h1>
-        <span class="line" data-edit-key="hero.title.line1">Atrévete a marcar</span>
-        <span class="line" data-edit-key="hero.title.line2">la diferencia,</span>
-        <span class="line" data-edit-key="hero.title.line3">viste tu estilo, <span class="accent" data-edit-key="hero.title.accent">viste NJ23</span></span>
+        <span class="line" data-edit-key="hero_title_line1">Atrévete a marcar</span>
+        <span class="line" data-edit-key="hero_title_line2">la diferencia,</span>
+        <span class="line" data-edit-key="hero_title_line3">viste tu estilo, <span class="accent" data-edit-key="hero_title_accent">viste NJ23</span></span>
       </h1>
       <svg class="underline-svg" viewBox="0 0 220 20"><path d="M4 14 C 60 4, 140 20, 216 8"/></svg>
     </div>
     <div class="hero-copy">
-      <p data-edit-key="hero.description">Pantalonetas y ropa urbana con actitud: siluetas anchas, telas resistentes y detalles que no pasan desapercibidos en NJ23.</p>
+      <p data-edit-key="hero_description">Pantalonetas y ropa urbana con actitud: siluetas anchas, telas resistentes y detalles que no pasan desapercibidos en NJ23.</p>
       <div class="hero-actions">
-        <a href="#coleccion" class="btn-primary" data-edit-key="hero.cta.primary">Ver catálogo →</a>
-        <a href="#proceso" class="btn-ghost" data-edit-key="hero.cta.secondary">Cómo comprar</a>
+        <a href="#coleccion" class="btn-primary" data-edit-key="hero_cta_primary">Ver catálogo →</a>
+        <a href="#proceso" class="btn-ghost" data-edit-key="hero_cta_secondary">Cómo comprar</a>
       </div>
     </div>
   </div>
@@ -543,8 +532,8 @@
 <section class="section" id="coleccion">
   <div class="wrap">
     <div class="section-head reveal">
-      <h2 data-edit-key="catalog.title">El catálogo</h2>
-      <p data-edit-key="catalog.description">Piezas resistentes, pensadas para el asfalto, no para la vitrina.</p>
+      <h2 data-edit-key="catalog_title">El catálogo</h2>
+      <p data-edit-key="catalog_description">Piezas resistentes, pensadas para el asfalto, no para la vitrina.</p>
     </div>
 
     <div class="filters reveal" id="filters">
@@ -559,13 +548,13 @@
   <div class="wrap">
     <div class="band-grid">
       <div class="reveal">
-        <div class="eyebrow" data-edit-key="band.eyebrow">Hecho para durar en la calle</div>
-        <h2 data-edit-key="band.title">Costuras reforzadas, cero excusas</h2>
-        <p data-edit-key="band.description">Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.</p>
+        <div class="eyebrow" data-edit-key="band_eyebrow">Hecho para durar en la calle</div>
+        <h2 data-edit-key="band_title">Costuras reforzadas, cero excusas</h2>
+        <p data-edit-key="band_description">Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.</p>
         <div class="stat-row">
-          <div class="stat"><b data-edit-key="band.stat1.value">12</b><span data-edit-key="band.stat1.label">Talleres locales</span></div>
-          <div class="stat"><b data-edit-key="band.stat2.value">48H</b><span data-edit-key="band.stat2.label">Envío promedio</span></div>
-          <div class="stat"><b data-edit-key="band.stat3.value">4.8</b><span data-edit-key="band.stat3.label">Calificación</span></div>
+          <div class="stat"><b data-edit-key="band_stat1_value">12</b><span data-edit-key="band_stat1_label">Talleres locales</span></div>
+          <div class="stat"><b data-edit-key="band_stat2_value">48H</b><span data-edit-key="band_stat2_label">Envío promedio</span></div>
+          <div class="stat"><b data-edit-key="band_stat3_value">4.8</b><span data-edit-key="band_stat3_label">Calificación</span></div>
         </div>
       </div>
       <div class="band-visual reveal">
@@ -582,24 +571,24 @@
 <section class="section" id="proceso">
   <div class="wrap">
     <div class="section-head reveal">
-      <h2 data-edit-key="process.title">Cómo comprar</h2>
-      <p data-edit-key="process.description">Tres pasos, sin vueltas.</p>
+      <h2 data-edit-key="process_title">Cómo comprar</h2>
+      <p data-edit-key="process_description">Tres pasos, sin vueltas.</p>
     </div>
     <div class="steps">
       <div class="step reveal">
-        <span class="num" data-edit-key="process.step1.num">01</span>
-        <h3 data-edit-key="process.step1.title">Elige tu talla</h3>
-        <p data-edit-key="process.step1.text">Cada producto trae una guía de tallas basada en medidas reales, no de maniquí.</p>
+        <span class="num" data-edit-key="process_step1_num">01</span>
+        <h3 data-edit-key="process_step1_title">Elige tu talla</h3>
+        <p data-edit-key="process_step1_text">Cada producto trae una guía de tallas basada en medidas reales, no de maniquí.</p>
       </div>
       <div class="step reveal">
-        <span class="num" data-edit-key="process.step2.num">02</span>
-        <h3 data-edit-key="process.step2.title">Escríbenos por WhatsApp</h3>
-        <p data-edit-key="process.step2.text">Confirmamos disponibilidad y coordinamos el pago en minutos.</p>
+        <span class="num" data-edit-key="process_step2_num">02</span>
+        <h3 data-edit-key="process_step2_title">Escríbenos por WhatsApp</h3>
+        <p data-edit-key="process_step2_text">Confirmamos disponibilidad y coordinamos el pago en minutos.</p>
       </div>
       <div class="step reveal">
-        <span class="num" data-edit-key="process.step3.num">03</span>
-        <h3 data-edit-key="process.step3.title">Recíbelo en casa</h3>
-        <p data-edit-key="process.step3.text">Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.</p>
+        <span class="num" data-edit-key="process_step3_num">03</span>
+        <h3 data-edit-key="process_step3_title">Recíbelo en casa</h3>
+        <p data-edit-key="process_step3_text">Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.</p>
       </div>
     </div>
   </div>
@@ -607,8 +596,8 @@
 
 <section class="cta reveal">
   <div class="wrap">
-    <h2 data-edit-key="cta.title">Tu próxima pieza favorita está en la calle</h2>
-    <a href="#coleccion" class="btn-primary" data-edit-key="cta.button">Ver todo el catálogo →</a>
+    <h2 data-edit-key="cta_title">Tu próxima pieza favorita está en la calle</h2>
+    <a href="#coleccion" class="btn-primary" data-edit-key="cta_button">Ver todo el catálogo →</a>
   </div>
 </section>
 
@@ -617,7 +606,7 @@
     <div class="foot-grid">
       <div>
         <div class="logo" style="margin-bottom:14px;"><img src="img/img.png" alt="NJ23"></div>
-        <p style="color:var(--paper-70); font-size:14px; max-width:32ch; line-height:1.6;" data-edit-key="footer.tagline">Ropa urbana hecha en la costa, para la calle.</p>
+        <p style="color:var(--paper-70); font-size:14px; max-width:32ch; line-height:1.6;" data-edit-key="footer_tagline">Ropa urbana hecha en la costa, para la calle.</p>
       </div>
       <div>
         <h4>Catálogo</h4>
@@ -638,15 +627,15 @@
       <div>
         <h4>Contacto</h4>
         <ul>
-          <li><a href="#" data-edit-key="footer.contact.whatsapp">WhatsApp</a></li>
-          <li><a href="#" data-edit-key="footer.contact.instagram">Instagram</a></li>
-          <li><a href="#" data-edit-key="footer.contact.email">hola@nj23.co</a></li>
+          <li><a href="#" data-edit-key="footer_contact_whatsapp">WhatsApp</a></li>
+          <li><a href="#" data-edit-key="footer_contact_instagram">Instagram</a></li>
+          <li><a href="#" data-edit-key="footer_contact_email">hola@nj23.co</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <p data-edit-key="footer.copyright">© 2026 NJ23. Barranquilla, Colombia.</p>
-      <p data-edit-key="footer.slogan">Atrévete a marcar la diferencia, viste tu estilo, viste NJ23.</p>
+      <p data-edit-key="footer_copyright">© 2026 NJ23. Barranquilla, Colombia.</p>
+      <p data-edit-key="footer_slogan">Atrévete a marcar la diferencia, viste tu estilo, viste NJ23.</p>
     </div>
   </div>
 </footer>
@@ -675,20 +664,11 @@
 <div class="modal-overlay" id="adminModal">
   <div class="modal admin-modal">
     <button class="modal-close" data-close="adminModal">&times;</button>
-    <div class="admin-header">
-      <h2>Panel de administración</h2>
-      <div class="publish-status" id="publishStatus" title="Estado de sincronización">
-        <span class="status-dot" id="adminStatusDot"></span>
-        <span id="adminStatusText">Sincronizado</span>
-      </div>
-    </div>
-    <div class="admin-note" style="margin-bottom:14px;">Versión del panel: <strong id="adminVersion">v2.1</strong>. Si ves errores, recarga con <strong>Ctrl+F5</strong>.</div>
-    <button class="btn-github" id="publishNowTop" style="margin-bottom:14px; width:100%;">💾 Publicar cambios ahora</button>
+    <h2>Panel de administración</h2>
 
     <div class="admin-tabs">
       <button class="admin-tab active" data-tab="products">Productos</button>
       <button class="admin-tab" data-tab="categories">Catálogos</button>
-      <button class="admin-tab" data-tab="github">Configuración</button>
     </div>
 
     <div class="admin-section active" id="tab-products">
@@ -725,45 +705,6 @@
       <button class="btn-add" id="addCategory">+ Crear catálogo</button>
     </div>
 
-    <div class="admin-section" id="tab-github">
-      <div class="admin-note" id="githubNote">
-        <strong>Para que los cambios persistan</strong> debes crear un token en GitHub.<br>
-        1. Ve a GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens.<br>
-        2. Crea un token con permiso <strong>Contents: Read and write</strong> para el repositorio <strong>JeanFranco2805/NJ23</strong>.<br>
-        3. Pégalo aquí y presiona <strong>Probar conexión</strong>.<br>
-        <strong>El token se guarda solo en este navegador</strong>, no en el código fuente.
-      </div>
-
-      <div class="github-status" id="githubStatus">
-        <span class="status-dot" id="statusDot"></span>
-        <span id="statusText">No configurado</span>
-      </div>
-
-      <div class="form-group">
-        <label for="ghToken">Clave de acceso (token)</label>
-        <input type="password" id="ghToken" placeholder="github_pat_...">
-      </div>
-      <div class="form-group">
-        <label for="ghOwner">Usuario</label>
-        <input type="text" id="ghOwner" value="JeanFranco2805" placeholder="tu-usuario">
-      </div>
-      <div class="form-group">
-        <label for="ghRepo">Repositorio</label>
-        <input type="text" id="ghRepo" value="NJ23" placeholder="NJ23">
-      </div>
-      <div class="form-group">
-        <label for="ghPath">Archivo del catálogo</label>
-        <input type="text" id="ghPath" value="catalogo.json" placeholder="catalogo.json">
-      </div>
-      <div class="form-group">
-        <label for="ghBranch">Rama</label>
-        <input type="text" id="ghBranch" value="main" placeholder="main">
-      </div>
-
-      <button class="btn-primary" id="testGithub" style="width:100%; justify-content:center; margin-bottom:10px;">Probar conexión</button>
-      <button class="btn-github" id="saveGithub" style="margin-bottom:10px;">💾 Publicar cambios ahora</button>
-      <button class="btn-ghost" id="discardLocal" style="width:100%; border-color:var(--red); color:var(--red);">🗑️ Descartar cambios y volver a cargar</button>
-    </div>
   </div>
 </div>
 
@@ -862,12 +803,8 @@
   /* ===================== CONFIGURACIÓN ===================== */
   const ADMIN_PASSWORD = 'nj23admin';
   const WA_NUMBER = '573239120468';
-  const CATALOG_URL = location.protocol === 'file:'
-    ? 'https://raw.githubusercontent.com/JeanFranco2805/NJ23/main/catalogo.json'
-    : 'catalogo.json';
+  const FIREBASE_URL = 'https://nj23-47881-default-rtdb.firebaseio.com/catalogo.json';
   const STORAGE_SESSION = 'nj23_admin_session';
-  const STORAGE_GH = 'nj23_github_config';
-  const STORAGE_BACKUP = 'nj23_local_backup';
   const ASSETS_PATH = 'assets/productos/';
 
   const SVG_SHORTS = `<svg viewBox="0 0 100 100" fill="none" stroke="#F1EFE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18 L80 18 L83 46 L62 46 L60 84 L50 84 L48 52 L52 52 L50 84 L38 84 L36 46 L17 46 Z"/><path d="M20 18 L17 46"/><path d="M80 18 L83 46"/></svg>`;
@@ -953,44 +890,44 @@
 
   /* ===================== DATOS INICIALES (fallback) ===================== */
   const defaultPageContent = {
-    'hero.eyebrow': 'Colección de la calle',
-    'hero.title.line1': 'Atrévete a marcar',
-    'hero.title.line2': 'la diferencia,',
-    'hero.title.line3': 'viste tu estilo,',
-    'hero.title.accent': 'viste NJ23',
-    'hero.description': 'Pantalonetas y ropa urbana con actitud: siluetas anchas, telas resistentes y detalles que no pasan desapercibidos en NJ23.',
-    'hero.cta.primary': 'Ver catálogo →',
-    'hero.cta.secondary': 'Cómo comprar',
-    'catalog.title': 'El catálogo',
-    'catalog.description': 'Piezas resistentes, pensadas para el asfalto, no para la vitrina.',
-    'band.eyebrow': 'Hecho para durar en la calle',
-    'band.title': 'Costuras reforzadas, cero excusas',
-    'band.description': 'Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.',
-    'band.stat1.value': '12',
-    'band.stat1.label': 'Talleres locales',
-    'band.stat2.value': '48H',
-    'band.stat2.label': 'Envío promedio',
-    'band.stat3.value': '4.8',
-    'band.stat3.label': 'Calificación',
-    'process.title': 'Cómo comprar',
-    'process.description': 'Tres pasos, sin vueltas.',
-    'process.step1.num': '01',
-    'process.step1.title': 'Elige tu talla',
-    'process.step1.text': 'Cada producto trae una guía de tallas basada en medidas reales, no de maniquí.',
-    'process.step2.num': '02',
-    'process.step2.title': 'Escríbenos por WhatsApp',
-    'process.step2.text': 'Confirmamos disponibilidad y coordinamos el pago en minutos.',
-    'process.step3.num': '03',
-    'process.step3.title': 'Recíbelo en casa',
-    'process.step3.text': 'Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.',
-    'cta.title': 'Tu próxima pieza favorita está en la calle',
-    'cta.button': 'Ver todo el catálogo →',
-    'footer.tagline': 'Ropa urbana hecha en la costa, para la calle.',
-    'footer.copyright': '© 2026 NJ23. Barranquilla, Colombia.',
-    'footer.slogan': 'Atrévete a marcar la diferencia, viste tu estilo, viste NJ23.',
-    'footer.contact.whatsapp': 'WhatsApp',
-    'footer.contact.instagram': 'Instagram',
-    'footer.contact.email': 'hola@nj23.co'
+    'hero_eyebrow': 'Colección de la calle',
+    'hero_title_line1': 'Atrévete a marcar',
+    'hero_title_line2': 'la diferencia,',
+    'hero_title_line3': 'viste tu estilo,',
+    'hero_title_accent': 'viste NJ23',
+    'hero_description': 'Pantalonetas y ropa urbana con actitud: siluetas anchas, telas resistentes y detalles que no pasan desapercibidos en NJ23.',
+    'hero_cta_primary': 'Ver catálogo →',
+    'hero_cta_secondary': 'Cómo comprar',
+    'catalog_title': 'El catálogo',
+    'catalog_description': 'Piezas resistentes, pensadas para el asfalto, no para la vitrina.',
+    'band_eyebrow': 'Hecho para durar en la calle',
+    'band_title': 'Costuras reforzadas, cero excusas',
+    'band_description': 'Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.',
+    'band_stat1_value': '12',
+    'band_stat1_label': 'Talleres locales',
+    'band_stat2_value': '48H',
+    'band_stat2_label': 'Envío promedio',
+    'band_stat3_value': '4.8',
+    'band_stat3_label': 'Calificación',
+    'process_title': 'Cómo comprar',
+    'process_description': 'Tres pasos, sin vueltas.',
+    'process_step1_num': '01',
+    'process_step1_title': 'Elige tu talla',
+    'process_step1_text': 'Cada producto trae una guía de tallas basada en medidas reales, no de maniquí.',
+    'process_step2_num': '02',
+    'process_step2_title': 'Escríbenos por WhatsApp',
+    'process_step2_text': 'Confirmamos disponibilidad y coordinamos el pago en minutos.',
+    'process_step3_num': '03',
+    'process_step3_title': 'Recíbelo en casa',
+    'process_step3_text': 'Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.',
+    'cta_title': 'Tu próxima pieza favorita está en la calle',
+    'cta_button': 'Ver todo el catálogo →',
+    'footer_tagline': 'Ropa urbana hecha en la costa, para la calle.',
+    'footer_copyright': '© 2026 NJ23. Barranquilla, Colombia.',
+    'footer_slogan': 'Atrévete a marcar la diferencia, viste tu estilo, viste NJ23.',
+    'footer_contact_whatsapp': 'WhatsApp',
+    'footer_contact_instagram': 'Instagram',
+    'footer_contact_email': 'hola@nj23.co'
   };
 
   const defaultData = {
@@ -1005,228 +942,67 @@
 
   /* ===================== ESTADO ===================== */
   let appData = { categories: [], products: [] };
-  let githubSha = null;
   let productPage = 1;
   let productPerPage = 10;
   let editingProductId = null;
   let pendingImageFile = null;
   let pendingImagePath = null;
-  let autoSaveTimer = null;
   let pageLoaded = false;
-  let hasLocalChanges = false;
-
-  /* ===================== GITHUB CONFIG ===================== */
-  function getGithubConfig(){
-    const raw = localStorage.getItem(STORAGE_GH);
-    return raw ? JSON.parse(raw) : { token:'', owner:'JeanFranco2805', repo:'NJ23', path:'catalogo.json', branch:'main' };
-  }
-  function saveGithubConfig(cfg){ localStorage.setItem(STORAGE_GH, JSON.stringify(cfg)); }
 
   function isLoggedIn(){ return localStorage.getItem(STORAGE_SESSION) === '1'; }
   function setLoggedIn(v){ v ? localStorage.setItem(STORAGE_SESSION, '1') : localStorage.removeItem(STORAGE_SESSION); }
 
   /* ===================== CARGAR CATÁLOGO ===================== */
   async function loadCatalog(){
-    let remoteData = null;
     try{
-      const res = await fetch(CATALOG_URL + '?nocache=' + Date.now(), { cache: 'no-store' });
-      if(!res.ok) throw new Error('No se pudo cargar catalogo.json');
-      remoteData = await res.json();
-    }catch(err){
-      console.warn('No se pudo cargar catalogo.json:', err);
-    }
-
-    const backup = localStorage.getItem(STORAGE_BACKUP);
-    if(backup){
-      try{
-        const backupData = JSON.parse(backup);
-        const remoteString = remoteData ? JSON.stringify(remoteData) : '';
-        const backupString = JSON.stringify(backupData);
-        if(remoteString && remoteString === backupString){
-          // ya están sincronizados, limpiar backup
-          clearLocalBackup();
-          appData = remoteData;
-          hasLocalChanges = false;
-        } else {
-          appData = backupData;
-          hasLocalChanges = true;
-          showToast('Cambios guardados. Se publicarán automáticamente en la web.', 'info', 5000);
-        }
-      }catch(e){
-        appData = remoteData || JSON.parse(JSON.stringify(defaultData));
-        hasLocalChanges = false;
+      const res = await fetch(FIREBASE_URL + '?_=' + Date.now(), { cache: 'no-store' });
+      if(!res.ok) throw new Error('Error ' + res.status);
+      const remoteData = await res.json();
+      if(remoteData){
+        appData = remoteData;
+      } else {
+        appData = JSON.parse(JSON.stringify(defaultData));
       }
-    } else {
-      appData = remoteData || JSON.parse(JSON.stringify(defaultData));
-      hasLocalChanges = false;
+    }catch(err){
+      console.warn('No se pudo cargar desde Firebase:', err);
+      appData = JSON.parse(JSON.stringify(defaultData));
     }
+    if(!appData.categories) appData.categories = JSON.parse(JSON.stringify(defaultData.categories));
+    if(!appData.products) appData.products = [];
     if(!appData.pageContent) appData.pageContent = JSON.parse(JSON.stringify(defaultPageContent));
     applyPageContent();
     renderAll();
-    updatePublishStatus();
   }
 
-  /* ===================== GITHUB API ===================== */
-  function githubApiUrl(cfg, path){
-    return `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${cfg.branch}`;
-  }
-
-  async function fetchFromGithub(cfg, path){
-    const res = await fetch(githubApiUrl(cfg, path || cfg.path), {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${cfg.token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    });
-    if(!res.ok){
-      const err = await res.json().catch(()=>({}));
-      throw new Error(err.message || `Error ${res.status}`);
-    }
-    return res.json();
-  }
-
-  async function uploadToGithub(cfg, path, contentBase64, message, sha){
-    const body = {
-      message: message || 'Actualización NJ23',
-      content: contentBase64,
-      branch: cfg.branch
-    };
-    if(sha) body.sha = sha;
-
-    const res = await fetch(githubApiUrl(cfg, path), {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${cfg.token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    const data = await res.json().catch(()=>({}));
-    if(!res.ok) throw new Error(data.message || `Error ${res.status}`);
-    return data;
-  }
-
-  async function deleteFromGithub(cfg, path){
-    let sha = null;
-    try{
-      const existing = await fetchFromGithub(cfg, path);
-      sha = existing.sha;
-    }catch(e){ return false; }
-    if(!sha) return false;
-
-    const res = await fetch(githubApiUrl(cfg, path), {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${cfg.token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: 'Eliminación de ' + path,
-        sha: sha,
-        branch: cfg.branch
-      })
-    });
-
-    if(!res.ok){
-      const data = await res.json().catch(()=>({}));
-      throw new Error(data.message || `Error ${res.status}`);
-    }
-    return true;
-  }
-
-  async function getCurrentSha(cfg){
-    const data = await fetchFromGithub(cfg);
-    if(!data.sha) throw new Error('Respuesta de GitHub no incluye SHA');
-    return data.sha;
-  }
-
-  async function saveCatalogToGithub(cfg){
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(appData, null, 2))));
-    let currentSha = null;
-    try{
-      currentSha = await getCurrentSha(cfg);
-    }catch(e){
-      console.warn('No se pudo obtener SHA, intentando subir como archivo nuevo:', e);
-    }
-    const data = await uploadToGithub(cfg, cfg.path, content, 'Actualización de catálogo NJ23', currentSha);
-    githubSha = data.content.sha;
-    return data;
-  }
-
-  async function uploadImageToGithub(cfg, filename, base64){
-    const path = ASSETS_PATH + filename;
-    let sha = null;
-    try{
-      const existing = await fetchFromGithub(cfg, path);
-      sha = existing.sha;
-    }catch(e){ /* no existe, es nuevo */ }
-    const data = await uploadToGithub(cfg, path, base64, 'Subida de imagen ' + filename, sha);
-    return path;
-  }
-
+  /* ===================== FIREBASE ===================== */
   let saveInProgress = false;
+  let saveTimer = null;
 
-  async function doSaveToGithub(silent=false, attempt=1){
-    const cfg = getGithubConfig();
-    if(!cfg.token || !cfg.owner || !cfg.repo){
-      if(!silent) showToast('Configura GitHub en la pestaña Configuración para publicar cambios', 'error', 5000);
-      updatePublishStatus();
-      return false;
-    }
-    if(saveInProgress){
-      console.log('Guardado ya en progreso, esperando...');
-      await new Promise(r => setTimeout(r, 1500));
-      return doSaveToGithub(silent, attempt);
-    }
+  async function saveToFirebase(){
+    if(saveInProgress) return;
     saveInProgress = true;
     try{
-      await saveCatalogToGithub(cfg);
-      clearLocalBackup();
-      clearLocalChanges();
-      if(!silent) showToast('Cambios publicados en la web', 'success');
-      return true;
+      const res = await fetch(FIREBASE_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(appData)
+      });
+      if(!res.ok) throw new Error('Error ' + res.status);
+      showToast('Guardado en la nube', 'success');
     }catch(err){
-      console.warn('Auto-save falló:', err);
-      if(attempt < 5 && err.message && err.message.includes('does not match')){
-        console.warn('SHA desactualizado, reintentando (intento ' + attempt + ')...');
-        githubSha = null;
-        await new Promise(r => setTimeout(r, 1000 * attempt));
-        return doSaveToGithub(silent, attempt + 1);
-      }
-      if(!silent) showToast('No se pudieron publicar los cambios: ' + err.message, 'error', 8000);
-      updatePublishStatus();
-      return false;
+      console.warn('Error guardando en Firebase:', err);
+      showToast('No se pudo guardar: ' + err.message, 'error', 5000);
     }finally{
       saveInProgress = false;
     }
   }
 
-  let saveRetryTimer = null;
-
-  function scheduleAutoSave(){
+  function scheduleSave(){
     if(!pageLoaded) return;
-    if(autoSaveTimer) clearTimeout(autoSaveTimer);
-    autoSaveTimer = setTimeout(()=>{
-      queueAutoSave();
-    }, 2000);
-  }
-
-  async function queueAutoSave(){
-    if(saveRetryTimer) clearTimeout(saveRetryTimer);
-    const ok = await doSaveToGithub(true);
-    if(!ok){
-      saveRetryTimer = setTimeout(()=>{
-        console.log('Reintentando publicar cambios...');
-        queueAutoSave();
-      }, 5000);
-    }
+    if(saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(()=>{
+      saveToFirebase();
+    }, 1500);
   }
 
   /* ===================== UTILIDADES ===================== */
@@ -1393,27 +1169,13 @@
     ul.innerHTML = appData.categories.map(c => `<li><a href="#coleccion">${c.name}</a></li>`).join('');
   }
 
-  function saveLocalBackup(){
-    try{
-      localStorage.setItem(STORAGE_BACKUP, JSON.stringify(appData));
-    }catch(e){
-      console.warn('No se pudo guardar backup local:', e);
-    }
-  }
-
-  function clearLocalBackup(){
-    localStorage.removeItem(STORAGE_BACKUP);
-  }
-
   function renderAll(){
     renderFilters();
     renderProducts();
     renderFooterCatalog();
     renderAdminProductTable();
     renderAdminCategories();
-    saveLocalBackup();
-    scheduleAutoSave();
-    if(pageLoaded) markLocalChanges();
+    scheduleSave();
   }
 
   /* ===================== EDICIÓN INLINE DE CONTENIDO ===================== */
@@ -1425,9 +1187,7 @@
   function setPageContent(key, value){
     if(!appData.pageContent) appData.pageContent = {};
     appData.pageContent[key] = value;
-    saveLocalBackup();
-    scheduleAutoSave();
-    markLocalChanges();
+    scheduleSave();
   }
 
   function applyPageContent(){
@@ -1472,16 +1232,12 @@
     sel.removeAllRanges();
     sel.addRange(range);
 
-    const saveEdit = async ()=>{
+    const saveEdit = ()=>{
       const key = el.dataset.editKey;
       const newText = el.textContent.trim();
       if(newText && newText !== getPageContent(key)){
         setPageContent(key, newText);
-        showToast('Texto actualizado. Publicando...', 'info');
-        const published = await doSaveToGithub(false);
-        if(!published){
-          showToast('Texto guardado localmente. Recuerda publicar para la web.', 'warning', 5000);
-        }
+        showToast('Texto actualizado', 'success');
       }
       el.contentEditable = 'false';
       el.blur();
@@ -1571,13 +1327,8 @@
         const ok = await showConfirm('¿Eliminar este producto?', 'Eliminar producto', '🗑️');
         if(!ok) return;
         appData.products.splice(realIdx,1);
-        saveLocalBackup();
         renderAll();
-        showToast('Producto eliminado. Guardando...', 'info');
-        const published = await doSaveToGithub(false);
-        if(!published){
-          showToast('Producto eliminado localmente. Recuerda publicar para guardar en la web.', 'warning', 5000);
-        }
+        showToast('Producto eliminado', 'success');
       });
       tbody.appendChild(tr);
     });
@@ -1788,13 +1539,8 @@
     pendingImageFile = null;
     pendingImagePath = null;
     closeModal('productModal');
-    saveLocalBackup();
     renderAll();
-    showToast('Guardando producto...', 'info');
-    const published = await doSaveToGithub(false);
-    if(!published){
-      showToast('Producto guardado localmente. Recuerda publicar para la web.', 'warning', 5000);
-    }
+    showToast('Producto guardado', 'success');
   }
 
   /* ---------- categorías ---------- */
@@ -1816,13 +1562,8 @@
         const newName = item.querySelector('input').value.trim();
         if(!newName){ await showAlert('El nombre no puede estar vacío', 'Faltan datos', '⚠️'); return; }
         appData.categories[idx].name = newName;
-        saveLocalBackup();
         renderAll();
-        showToast('Catálogo actualizado. Publicando...', 'info');
-        const published = await doSaveToGithub(false);
-        if(!published){
-          showToast('Catálogo guardado localmente. Recuerda publicar.', 'warning', 5000);
-        }
+        showToast('Catálogo actualizado', 'success');
         item.style.borderColor = 'var(--green)';
         setTimeout(()=> item.style.borderColor = '', 600);
       });
@@ -1830,91 +1571,11 @@
         const ok = await showConfirm('¿Eliminar este catálogo? Los productos asociados quedarán sin categoría.', 'Eliminar catálogo', '🗑️');
         if(!ok) return;
         appData.categories.splice(idx,1);
-        saveLocalBackup();
         renderAll();
-        showToast('Catálogo eliminado. Publicando...', 'info');
-        const published = await doSaveToGithub(false);
-        if(!published){
-          showToast('Catálogo eliminado localmente. Recuerda publicar.', 'warning', 5000);
-        }
+        showToast('Catálogo eliminado', 'success');
       });
       list.appendChild(item);
     });
-  }
-
-  /* ---------- github config ---------- */
-  function loadGithubForm(){
-    const raw = localStorage.getItem(STORAGE_GH);
-    if(!raw){
-      updateGithubStatus(false, 'Falta token');
-      return;
-    }
-    const cfg = JSON.parse(raw);
-    if(cfg.token) document.getElementById('ghToken').value = cfg.token;
-    if(cfg.owner) document.getElementById('ghOwner').value = cfg.owner;
-    if(cfg.repo) document.getElementById('ghRepo').value = cfg.repo;
-    if(cfg.path) document.getElementById('ghPath').value = cfg.path;
-    if(cfg.branch) document.getElementById('ghBranch').value = cfg.branch;
-    updateGithubStatus(false, 'Falta probar conexión');
-  }
-
-  function readGithubForm(){
-    return {
-      token: document.getElementById('ghToken').value.trim(),
-      owner: document.getElementById('ghOwner').value.trim(),
-      repo: document.getElementById('ghRepo').value.trim(),
-      path: document.getElementById('ghPath').value.trim() || 'catalogo.json',
-      branch: document.getElementById('ghBranch').value.trim() || 'main'
-    };
-  }
-
-  function updateGithubStatus(ok, text){
-    const dot = document.getElementById('statusDot');
-    const txt = document.getElementById('statusText');
-    if(dot) dot.className = 'status-dot ' + (ok ? 'ok' : 'bad');
-    if(txt) txt.textContent = text;
-  }
-
-  function updatePublishStatus(){
-    const wrapper = document.getElementById('publishStatus');
-    const dot = document.getElementById('adminStatusDot');
-    const txt = document.getElementById('adminStatusText');
-    if(!wrapper || !dot || !txt) return;
-    const cfg = getGithubConfig();
-    const configured = cfg.token && cfg.owner && cfg.repo;
-
-    if(!configured){
-      wrapper.className = 'publish-status error';
-      dot.className = 'status-dot';
-      txt.textContent = hasLocalChanges ? 'Cambios sin publicar: falta GitHub' : 'Falta configurar GitHub';
-      return;
-    }
-
-    if(hasLocalChanges){
-      wrapper.className = 'publish-status pending';
-      dot.className = 'status-dot';
-      txt.textContent = 'Cambios no publicados';
-    } else {
-      wrapper.className = 'publish-status';
-      dot.className = 'status-dot';
-      txt.textContent = 'Sincronizado';
-    }
-  }
-
-  function markLocalChanges(){
-    hasLocalChanges = true;
-    updatePublishStatus();
-  }
-
-  function clearLocalChanges(){
-    hasLocalChanges = false;
-    updatePublishStatus();
-  }
-
-  function showGithubNote(type, html){
-    const note = document.getElementById('githubNote');
-    note.className = 'admin-note ' + (type === 'error' ? 'error' : type === 'success' ? 'success' : '');
-    note.innerHTML = html;
   }
 
   /* ===================== EVENTOS ===================== */
@@ -1932,7 +1593,6 @@
   document.getElementById('adminBtn').addEventListener('click', ()=>{
     renderAdminProductTable();
     renderAdminCategories();
-    loadGithubForm();
     openModal('adminModal');
   });
 
@@ -1946,7 +1606,6 @@
       document.getElementById('loginError').style.display = 'none';
       renderAdminProductTable();
       renderAdminCategories();
-      loadGithubForm();
       openModal('adminModal');
     } else {
       document.getElementById('loginError').style.display = 'block';
@@ -2003,104 +1662,14 @@
     const id = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     if(appData.categories.some(c=>c.id===id)){ await showAlert('Ya existe un catálogo con ese identificador.', 'Error', '❌'); return; }
     appData.categories.push({ id, name: name.trim() });
-    saveLocalBackup();
     renderAll();
-    showToast('Catálogo creado. Publicando...', 'info');
-    const published = await doSaveToGithub(false);
-    if(!published){
-      showToast('Catálogo creado localmente. Recuerda publicar.', 'warning', 5000);
-    }
-  });
-
-  document.getElementById('testGithub').addEventListener('click', async ()=>{
-    const cfg = readGithubForm();
-    if(!cfg.token || !cfg.owner || !cfg.repo){
-      showGithubNote('error', 'Completa la clave de acceso, usuario y repositorio.');
-      updateGithubStatus(false, 'Faltan datos');
-      return;
-    }
-    saveGithubConfig(cfg);
-    updateGithubStatus(false, 'Probando...');
-    try{
-      const data = await fetchFromGithub(cfg);
-      githubSha = data.sha;
-      if(data.content){
-        const decoded = decodeURIComponent(escape(atob(data.content.content || data.content)));
-        const remoteData = JSON.parse(decoded);
-        appData = remoteData;
-        renderAll();
-      }
-      updateGithubStatus(true, 'Conectado. Catálogo cargado.');
-      showGithubNote('success', 'Conexión exitosa. Los datos fueron cargados.');
-    }catch(err){
-      updateGithubStatus(false, 'Error: ' + err.message);
-      showGithubNote('error', 'Error al conectar: ' + err.message);
-    }
-  });
-
-  document.getElementById('saveGithub').addEventListener('click', async ()=>{
-    const cfg = readGithubForm();
-    if(!cfg.token || !cfg.owner || !cfg.repo){
-      showGithubNote('error', 'Completa la clave de acceso, usuario y repositorio antes de publicar.');
-      return;
-    }
-    saveGithubConfig(cfg);
-    const btn = document.getElementById('saveGithub');
-    btn.disabled = true;
-    btn.textContent = 'Publicando...';
-    const ok = await doSaveToGithub(false);
-    btn.disabled = false;
-    btn.textContent = '💾 Publicar cambios ahora';
-    if(ok){
-      updateGithubStatus(true, 'Publicado en la web');
-      showGithubNote('success', 'Cambios publicados correctamente. Pueden tardar unos minutos en verse en la web.');
-    }else{
-      updateGithubStatus(false, 'Error al publicar');
-      showGithubNote('error', 'No se pudo publicar. Revisa la clave de acceso y los permisos.');
-    }
-  });
-
-  document.getElementById('discardLocal').addEventListener('click', async ()=>{
-    const ok = await showConfirm('¿Descartar todos los cambios locales y volver a cargar el catálogo publicado?', 'Descartar cambios', '🗑️');
-    if(!ok) return;
-    clearLocalBackup();
-    showToast('Cambios descartados. Recargando...', 'info');
-    setTimeout(()=> location.reload(), 800);
-  });
-
-  document.getElementById('publishNowTop').addEventListener('click', async ()=>{
-    const btn = document.getElementById('publishNowTop');
-    const originalText = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Publicando...';
-    const ok = await doSaveToGithub(false);
-    btn.disabled = false;
-    btn.textContent = originalText;
-    if(!ok){
-      const cfg = getGithubConfig();
-      if(!cfg.token || !cfg.owner || !cfg.repo){
-        showToast('Ve a la pestaña Configuración y conecta GitHub antes de publicar.', 'error', 5000);
-      }
-    }
-  });
-
-  window.addEventListener('beforeunload', (e)=>{
-    if(hasLocalChanges){
-      e.preventDefault();
-      e.returnValue = 'Tienes cambios no publicados. Si sales ahora, se perderán si no tienes GitHub configurado.';
-    }
+    showToast('Catálogo creado', 'success');
   });
 
   /* ===================== INICIO ===================== */
-  console.log('NJ23 Admin Panel v2.1 cargado');
-  if(location.protocol === 'file:'){
-    document.getElementById('fileWarning').style.display = 'block';
-  }
   updateAdminUI();
   loadCatalog().then(()=>{
     pageLoaded = true;
-    updatePublishStatus();
-    scheduleAutoSave();
   });
 </script>
 
