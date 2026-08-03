@@ -15,37 +15,6 @@
   ],
   "products": [
     {
-      "id": "p3",
-      "name": "Pantaloneta NJ23",
-      "cat": "pantalonetas",
-      "price": 79900,
-      "sizes": [
-        {
-          "size": "S",
-          "stock": 2
-        },
-        {
-          "size": "M",
-          "stock": 7
-        },
-        {
-          "size": "L",
-          "stock": 6
-        },
-        {
-          "size": "XL",
-          "stock": 3
-        }
-      ],
-      "colors": [
-        "#FF2E7E",
-        "#0F0F11"
-      ],
-      "tag": "best seller",
-      "bg": "#2E2A24",
-      "svg": "shorts"
-    },
-    {
       "id": "p4",
       "name": "Camiseta Muro",
       "cat": "camisetas",
