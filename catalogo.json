@@ -189,6 +189,24 @@
       "tag": "",
       "bg": "#2A2626",
       "svg": "shorts"
+    },
+    {
+      "id": "p1785725378094",
+      "name": "ZZZ Test Product",
+      "cat": "pantalonetas",
+      "price": 1000,
+      "sizes": [
+        {
+          "size": "M",
+          "stock": 1
+        }
+      ],
+      "colors": [
+        "#FFD400"
+      ],
+      "tag": "",
+      "bg": "#2a2a2e",
+      "svg": "shorts"
     }
   ],
   "pageContent": {
