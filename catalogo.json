@@ -15,6 +15,38 @@
   ],
   "products": [
     {
+      "id": "p1",
+      "name": "Pantaloneta Asfalto",
+      "cat": "pantalonetas",
+      "price": 89900,
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 5
+        },
+        {
+          "size": "M",
+          "stock": 8
+        },
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "XL",
+          "stock": 2
+        }
+      ],
+      "colors": [
+        "#FFD400",
+        "#FF2E7E",
+        "#0F0F11"
+      ],
+      "tag": "new",
+      "bg": "#2A2A2E",
+      "svg": "shorts"
+    },
+    {
       "id": "p2",
       "name": "Camiseta Bloque",
       "cat": "camisetas",
