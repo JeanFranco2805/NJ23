@@ -868,7 +868,6 @@
   const STORAGE_SESSION = 'nj23_admin_session';
   const STORAGE_GH = 'nj23_github_config';
   const STORAGE_BACKUP = 'nj23_local_backup';
-  const DEFAULT_GH_TOKEN = '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';
   const ASSETS_PATH = 'assets/productos/';
 
   const SVG_SHORTS = `<svg viewBox="0 0 100 100" fill="none" stroke="#F1EFE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18 L80 18 L83 46 L62 46 L60 84 L50 84 L48 52 L52 52 L50 84 L38 84 L36 46 L17 46 Z"/><path d="M20 18 L17 46"/><path d="M80 18 L83 46"/></svg>`;
@@ -1019,14 +1018,7 @@
   /* ===================== GITHUB CONFIG ===================== */
   function getGithubConfig(){
     const raw = localStorage.getItem(STORAGE_GH);
-    const saved = raw ? JSON.parse(raw) : {};
-    return {
-      token: DEFAULT_GH_TOKEN,
-      owner: saved.owner || 'JeanFranco2805',
-      repo: saved.repo || 'NJ23',
-      path: saved.path || 'catalogo.json',
-      branch: saved.branch || 'main'
-    };
+    return raw ? JSON.parse(raw) : { token:'', owner:'JeanFranco2805', repo:'NJ23', path:'catalogo.json', branch:'main' };
   }
   function saveGithubConfig(cfg){ localStorage.setItem(STORAGE_GH, JSON.stringify(cfg)); }
 
@@ -1852,16 +1844,17 @@
 
   /* ---------- github config ---------- */
   function loadGithubForm(){
-    const cfg = getGithubConfig();
-    document.getElementById('ghToken').value = cfg.token || DEFAULT_GH_TOKEN;
-    document.getElementById('ghOwner').value = cfg.owner || 'JeanFranco2805';
-    document.getElementById('ghRepo').value = cfg.repo || 'NJ23';
-    document.getElementById('ghPath').value = cfg.path || 'catalogo.json';
-    document.getElementById('ghBranch').value = cfg.branch || 'main';
-    if(!cfg.token){
+    const raw = localStorage.getItem(STORAGE_GH);
+    if(!raw){
       updateGithubStatus(false, 'Falta token');
       return;
     }
+    const cfg = JSON.parse(raw);
+    if(cfg.token) document.getElementById('ghToken').value = cfg.token;
+    if(cfg.owner) document.getElementById('ghOwner').value = cfg.owner;
+    if(cfg.repo) document.getElementById('ghRepo').value = cfg.repo;
+    if(cfg.path) document.getElementById('ghPath').value = cfg.path;
+    if(cfg.branch) document.getElementById('ghBranch').value = cfg.branch;
     updateGithubStatus(false, 'Falta probar conexión');
   }
 
