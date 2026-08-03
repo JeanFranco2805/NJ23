@@ -16,43 +16,96 @@
   "products": [
     {
       "id": "p1",
-      "name": "Pantaloneta Color Negro",
+      "name": "Pantaloneta Asfalto",
       "cat": "pantalonetas",
       "price": 89900,
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 5
+        },
+        {
+          "size": "M",
+          "stock": 8
+        },
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "XL",
+          "stock": 2
+        }
+      ],
       "colors": [
         "#FFD400",
         "#FF2E7E",
         "#0F0F11"
       ],
       "tag": "new",
-      "bg": "#2a2a2e",
-      "svg": "shorts",
-      "image": "assets/productos/1784654970957-pantaloneta-color-negro.jpg"
+      "bg": "#2A2A2E",
+      "svg": "shorts"
     },
     {
       "id": "p2",
-      "name": "Camiseta",
+      "name": "Camiseta Bloque",
       "cat": "camisetas",
       "price": 64900,
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 3
+        },
+        {
+          "size": "M",
+          "stock": 6
+        },
+        {
+          "size": "L",
+          "stock": 5
+        },
+        {
+          "size": "XL",
+          "stock": 1
+        }
+      ],
       "colors": [
         "#0F0F11",
         "#F1EFE6"
       ],
       "tag": "",
-      "bg": "#26262a",
+      "bg": "#26262A",
       "svg": "shirt"
     },
     {
       "id": "p3",
-      "name": "Pantaloneta",
+      "name": "Pantaloneta NJ23",
       "cat": "pantalonetas",
       "price": 79900,
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 2
+        },
+        {
+          "size": "M",
+          "stock": 7
+        },
+        {
+          "size": "L",
+          "stock": 6
+        },
+        {
+          "size": "XL",
+          "stock": 3
+        }
+      ],
       "colors": [
         "#FF2E7E",
         "#0F0F11"
       ],
       "tag": "best seller",
-      "bg": "#2e2a24",
+      "bg": "#2E2A24",
       "svg": "shorts"
     },
     {
@@ -60,6 +113,24 @@
       "name": "Camiseta Muro",
       "cat": "camisetas",
       "price": 59900,
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 4
+        },
+        {
+          "size": "M",
+          "stock": 9
+        },
+        {
+          "size": "L",
+          "stock": 3
+        },
+        {
+          "size": "XL",
+          "stock": 2
+        }
+      ],
       "colors": [
         "#FFD400",
         "#0F0F11",
@@ -74,6 +145,12 @@
       "name": "Gorra Barricada",
       "cat": "accesorios",
       "price": 44900,
+      "sizes": [
+        {
+          "size": "Única",
+          "stock": 10
+        }
+      ],
       "colors": [
         "#0F0F11",
         "#FFD400"
@@ -87,6 +164,24 @@
       "name": "Pantaloneta Concreto",
       "cat": "pantalonetas",
       "price": 84900,
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 6
+        },
+        {
+          "size": "M",
+          "stock": 4
+        },
+        {
+          "size": "L",
+          "stock": 5
+        },
+        {
+          "size": "XL",
+          "stock": 2
+        }
+      ],
       "colors": [
         "#F1EFE6",
         "#0F0F11"
@@ -106,7 +201,7 @@
     "hero.cta.primary": "Ver catálogo →",
     "hero.cta.secondary": "Cómo comprar",
     "catalog.title": "El catálogo",
-    "catalog.description": "Aca colocas un texto para mostrar, puedes editarlo despues",
+    "catalog.description": "Piezas resistentes, pensadas para el asfalto, no para la vitrina.",
     "band.eyebrow": "Hecho para durar en la calle",
     "band.title": "Costuras reforzadas, cero excusas",
     "band.description": "Telas gruesas y costuras dobles en las zonas de mayor desgaste. Cada pieza pasa por control de calidad antes de salir del taller.",
@@ -127,7 +222,7 @@
     "process.step3.num": "03",
     "process.step3.title": "Recíbelo en casa",
     "process.step3.text": "Enviamos a toda Colombia. En Barranquilla, entrega el mismo día.",
-    "cta.title": "Tu próxima pieza favorita está CON NOSOTROS",
+    "cta.title": "Tu próxima pieza favorita está en la calle",
     "cta.button": "Ver todo el catálogo →",
     "footer.tagline": "Ropa urbana hecha en la costa, para la calle.",
     "footer.copyright": "© 2026 NJ23. Barranquilla, Colombia.",
