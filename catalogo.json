@@ -15,37 +15,6 @@
   ],
   "products": [
     {
-      "id": "p2",
-      "name": "Camiseta Bloque",
-      "cat": "camisetas",
-      "price": 64900,
-      "sizes": [
-        {
-          "size": "S",
-          "stock": 3
-        },
-        {
-          "size": "M",
-          "stock": 6
-        },
-        {
-          "size": "L",
-          "stock": 5
-        },
-        {
-          "size": "XL",
-          "stock": 1
-        }
-      ],
-      "colors": [
-        "#0F0F11",
-        "#F1EFE6"
-      ],
-      "tag": "",
-      "bg": "#26262A",
-      "svg": "shirt"
-    },
-    {
       "id": "p3",
       "name": "Pantaloneta NJ23",
       "cat": "pantalonetas",
